@@ -1,5 +1,9 @@
-import { AnimationClip, AnimationMixer, LoopRepeat, Vector3 } from 'three';
-import { GLTF } from 'three/examples/jsm/loaders/GLTFLoader';
+import { AnimationClip, AnimationMixer, LoopRepeat, Vector3, Object3D, AnimationAction, Material } from 'three';
+
+interface GLTF {
+  scene: Object3D;
+  animations: AnimationClip[];
+}
 
 /**
  * Animation manager for 3D models
@@ -10,8 +14,8 @@ export class AnimationManager {
   private actions: { [key: string]: any } = {};
   private currentAction: string | null = null;
   
-  constructor(model: THREE.Object3D, animations: AnimationClip[] = []) {
-    this.mixer = new AnimationMixer(model);
+  constructor(model: Object3D, animations: AnimationClip[] = []) {
+    this.mixer = new AnimationMixer(model as any);
     this.animations = animations;
   }
   
@@ -142,7 +146,7 @@ export const animate = {
   /**
    * Create a simple rotation animation
    */
-  rotation: (object: THREE.Object3D, speed: number = 1, axis: 'x' | 'y' | 'z' = 'y') => {
+  rotation: (object: Object3D, speed: number = 1, axis: 'x' | 'y' | 'z' = 'y') => {
     return (delta: number) => {
       object.rotation[axis] += speed * delta;
     };
@@ -151,7 +155,7 @@ export const animate = {
   /**
    * Create a simple bounce animation
    */
-  bounce: (object: THREE.Object3D, height: number = 0.5, speed: number = 1) => {
+  bounce: (object: Object3D, height: number = 0.5, speed: number = 1) => {
     const startY = object.position.y;
     return (time: number) => {
       object.position.y = startY + Math.abs(Math.sin(time * speed)) * height;
@@ -161,7 +165,7 @@ export const animate = {
   /**
    * Create a simple hover animation
    */
-  hover: (object: THREE.Object3D, distance: number = 0.5, speed: number = 1) => {
+  hover: (object: Object3D, distance: number = 0.5, speed: number = 1) => {
     const startY = object.position.y;
     return (time: number) => {
       object.position.y = startY + Math.sin(time * speed) * distance;
@@ -171,7 +175,7 @@ export const animate = {
   /**
    * Create a simple pulse animation
    */
-  pulse: (object: THREE.Object3D, scale: number = 0.2, speed: number = 1) => {
+  pulse: (object: Object3D, scale: number = 0.2, speed: number = 1) => {
     const startScale = object.scale.clone();
     return (time: number) => {
       const scaleFactor = 1 + Math.sin(time * speed) * scale;
@@ -183,11 +187,11 @@ export const animate = {
    * Create a simple orbit animation
    */
   orbit: (
-    object: THREE.Object3D,
+    object: Object3D,
     radius: number = 5,
     speed: number = 1,
     axis: 'x' | 'y' | 'z' = 'y',
-    center: THREE.Vector3 = new Vector3()
+    center: Vector3 = new Vector3()
   ) => {
     const startPos = object.position.clone();
     return (time: number) => {
@@ -217,7 +221,7 @@ export const animate = {
    * Create a simple fade animation
    */
   fade: (
-    object: THREE.Object3D & { material?: THREE.Material | THREE.Material[] },
+    object: Object3D & { material?: Material | Material[] },
     targetOpacity: number = 0,
     duration: number = 1
   ) => {
@@ -239,7 +243,7 @@ export const animate = {
       const opacity = startOpacity + (targetOpacity - startOpacity) * progress;
       
       // Set opacity on all materials
-      const setOpacity = (material: THREE.Material) => {
+      const setOpacity = (material: Material) => {
         if ('opacity' in material) {
           (material as any).opacity = opacity;
           material.transparent = opacity < 1;
@@ -261,8 +265,8 @@ export const animate = {
    * Create a simple move animation
    */
   move: (
-    object: THREE.Object3D,
-    target: THREE.Vector3,
+    object: Object3D,
+    target: Vector3,
     duration: number = 1
   ) => {
     const start = object.position.clone();
@@ -288,8 +292,8 @@ export const animate = {
    * Create a simple scale animation
    */
   scale: (
-    object: THREE.Object3D,
-    targetScale: THREE.Vector3 | number,
+    object: Object3D,
+    targetScale: Vector3 | number,
     duration: number = 1
   ) => {
     const startScale = object.scale.clone();

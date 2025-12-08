@@ -1,5 +1,5 @@
 {
-  "name": "sirius-global-ventures",
+  "name": "quantum-wave-holdings",
   "version": "1.0.1",
   "type": "module",
   "resolutions": {
@@ -35,7 +35,7 @@
     "@hookform/resolvers": "^3.9.1",
     "@jridgewell/trace-mapping": "^0.3.25",
     "@neondatabase/serverless": "^0.10.4",
-    "@next/third-parties": "^15.5.2",
+    "@next/third-parties": "^15.5.6",
     "@radix-ui/react-accordion": "^1.2.1",
     "@radix-ui/react-alert-dialog": "^1.1.2",
     "@radix-ui/react-aspect-ratio": "^1.1.0",
@@ -86,7 +86,7 @@
     "input-otp": "^1.2.4",
     "lucide-react": "^0.453.0",
     "memorystore": "^1.6.7",
-    "next": "^15.3.4",
+    "next": "^16.0.5",
     "passport": "^0.7.0",
     "passport-local": "^1.0.0",
     "react": "^18.3.1",

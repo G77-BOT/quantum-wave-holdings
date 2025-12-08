@@ -17,11 +17,12 @@ interface Job {
   experience: string;
 }
 
-export default function CareerDetailPage({ params }: { params: { id: string } }) {
+export default function CareerDetailPage({ params }: { params: Promise<{ id: string }> }) {
   const router = useRouter();
   const [job, setJob] = useState<Job | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const [jobId, setJobId] = useState<string>('');
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -36,7 +37,9 @@ export default function CareerDetailPage({ params }: { params: { id: string } })
   useEffect(() => {
     const fetchJob = async () => {
       try {
-        const response = await fetch(`/api/jobs?id=${params.id}`, {
+        const resolvedParams = await params;
+        setJobId(resolvedParams.id);
+        const response = await fetch(`/api/jobs?id=${resolvedParams.id}`, {
           method: 'PUT',
         });
         
@@ -59,7 +62,7 @@ export default function CareerDetailPage({ params }: { params: { id: string } })
     };
 
     fetchJob();
-  }, [params.id]);
+  }, [params]);
 
   const validateForm = () => {
     const errors: Record<string, string> = {};
@@ -98,7 +101,7 @@ export default function CareerDetailPage({ params }: { params: { id: string } })
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          jobId: params.id,
+          jobId: jobId,
           ...formData
         }),
       });

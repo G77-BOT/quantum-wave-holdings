@@ -1,4 +1,7 @@
 'use client';
+
+export const dynamic = 'force-dynamic';
+
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { ArrowLeft, Plus, Edit, Trash, Save, X } from 'lucide-react';
@@ -13,6 +16,7 @@ interface NewsArticle {
   imageUrl?: string;
   subsidiaryId?: number;
 }
+
 
 export default function AdminNewsPage() {
   const [articles, setArticles] = useState<NewsArticle[]>([]);
@@ -120,7 +124,7 @@ export default function AdminNewsPage() {
           <div className="flex items-center justify-between">
             <Link href="/news" className="flex items-center space-x-3">
               <div className="w-10 h-10 bg-gradient-to-r from-blue-600 to-indigo-600 rounded-lg flex items-center justify-center">
-                <span className="text-white font-bold">SGV</span>
+                <span className="text-white font-bold">QWH</span>
               </div>
               <div>
                 <h1 className="text-xl font-bold bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent">

@@ -6,7 +6,7 @@ test.describe('Homepage', () => {
     await page.goto('/');
     
     // Check that the page title is correct
-    await expect(page).toHaveTitle(/Sirius Global Ventures/);
+    await expect(page).toHaveTitle(/Quantum Wave Holdings/);
     
     // Check that the main navigation is visible
     const nav = page.getByRole('navigation');

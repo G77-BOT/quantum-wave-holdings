@@ -334,7 +334,7 @@ export default function PerformancePage() {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             <div className="text-center p-4 bg-gray-50 dark:bg-gray-700 rounded-lg">
               <div className="text-2xl font-bold text-blue-600 dark:text-blue-400 mb-2">32.8%</div>
-              <div className="text-sm font-medium text-gray-900 dark:text-white mb-1">SGV Portfolio IRR</div>
+              <div className="text-sm font-medium text-gray-900 dark:text-white mb-1">QWH Portfolio IRR</div>
               <div className="text-xs text-gray-600 dark:text-gray-400">5-Year Average</div>
             </div>
             <div className="text-center p-4 bg-gray-50 dark:bg-gray-700 rounded-lg">

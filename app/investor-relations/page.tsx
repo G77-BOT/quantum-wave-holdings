@@ -1,4 +1,6 @@
 'use client';
+export const dynamic = 'force-dynamic';
+
 
 import Link from 'next/link';
 import { useState } from 'react';
@@ -383,10 +385,10 @@ export default function InvestorRelationsPage() {
               Contact IR Team
             </Link>
             <a
-              href="mailto:investors@siriusglobalventures.com"
+              href="mailto:investors@quantumwaveholdings.com"
               className="inline-flex items-center px-8 py-4 border-2 border-white text-white font-medium rounded-xl hover:bg-white/10 transition-colors"
             >
-              investors@siriusglobalventures.com
+              investors@quantumwaveholdings.com
             </a>
           </div>
         </section>

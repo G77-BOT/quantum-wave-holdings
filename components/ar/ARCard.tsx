@@ -4,10 +4,9 @@ import React, { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import dynamic from 'next/dynamic';
 import { X, Expand, Minimize, Move3d } from 'lucide-react';
-import { useARCard, useARViewer } from '@/hooks/useARInteractions';
 
 // Dynamically import ARViewer with no SSR
-const ARViewer = dynamic(() => import('./ARViewerNew'), { ssr: false });
+const ARViewer = dynamic(() => import('./ARViewer'), { ssr: false });
 
 interface ARCardProps {
   children: React.ReactNode;
@@ -26,19 +25,15 @@ export default function ARCard({
   modelUrl = '/models/company_logo.glb',
   overlayContent,
 }: ARCardProps) {
-  const {
-    cardRef,
-    mousePosition,
-    isHovered,
-    isExpanded,
-    toggleExpand,
-  } = useARCard();
+  const cardRef = useRef<HTMLDivElement>(null);
+  const [mousePosition, setMousePosition] = useState({ x: 0.5, y: 0.5 });
+  const [isHovered, setIsHovered] = useState(false);
+  const [isExpanded, setIsExpanded] = useState(false);
+  const [showARViewer, setShowARViewer] = useState(false);
 
-  const {
-    isViewerOpen: showARViewer,
-    openViewer: handleARViewerOpen,
-    closeViewer: handleARViewerClose,
-  } = useARViewer();
+  const toggleExpand = () => setIsExpanded(!isExpanded);
+  const handleARViewerOpen = () => setShowARViewer(true);
+  const handleARViewerClose = () => setShowARViewer(false);
 
   // Update glow color CSS variable
   useEffect(() => {
@@ -87,7 +82,7 @@ export default function ARCard({
           stiffness: 300,
           damping: 30,
         }}
-        onClick={arEnabled ? () => handleARViewerOpen(modelUrl) : undefined}
+        onClick={arEnabled ? handleARViewerOpen : undefined}
       >
         <div className="relative z-10 h-full">
           {children}
@@ -105,7 +100,7 @@ export default function ARCard({
               <button
                 onClick={(e) => {
                   e.stopPropagation();
-                  handleARViewerOpen(modelUrl);
+                  handleARViewerOpen();
                 }}
                 className="p-2 bg-black/30 backdrop-blur-sm rounded-full text-white hover:bg-black/50 transition-colors"
                 aria-label="View in AR"

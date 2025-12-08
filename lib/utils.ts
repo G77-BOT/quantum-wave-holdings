@@ -151,9 +151,14 @@ export function throttle<T extends (...args: any[]) => any>(
 
 // Deep merge objects
 export function deepMerge<T extends Record<string, any>>(target: T, source: Partial<T>): T {
-  const result = { ...target };
+  const result: any = { ...target };
   
-  for (const key in source) {
+  for (const key of Object.keys(source)) {
+    // Prevent prototype pollution
+    if (key === '__proto__' || key === 'constructor' || key === 'prototype') {
+      continue;
+    }
+    
     if (source[key] !== undefined) {
       if (
         source[key] &&

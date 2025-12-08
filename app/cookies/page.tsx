@@ -1,6 +1,8 @@
 import Link from 'next/link';
 import { Cookie, Settings, Eye, BarChart, Shield, Globe } from 'lucide-react';
 
+export const dynamic = 'force-dynamic';
+
 export default function CookiePolicyPage() {
   const lastUpdated = "March 1, 2024";
 
@@ -69,7 +71,7 @@ export default function CookiePolicyPage() {
                 <Cookie className="w-16 h-16 mx-auto mb-6 text-orange-100" />
                 <h1 className="text-4xl md:text-5xl font-bold mb-6">Cookie Policy</h1>
                 <p className="text-xl text-orange-100 max-w-3xl mx-auto leading-relaxed">
-                  Learn about how Sirius Global Ventures uses cookies and similar technologies 
+                  Learn about how Quantum Wave Holdings uses cookies and similar technologies 
                   to enhance your browsing experience and analyze website usage.
                 </p>
                 <p className="text-orange-200 mt-4">Last updated: {lastUpdated}</p>
@@ -100,7 +102,7 @@ export default function CookiePolicyPage() {
               <section className="mb-12">
                 <h2 className="text-2xl font-bold text-gray-900 mb-4">How We Use Cookies</h2>
                 <p className="text-gray-700 mb-6">
-                  Sirius Global Ventures uses cookies and similar technologies for various purposes:
+                  Quantum Wave Holdings uses cookies and similar technologies for various purposes:
                 </p>
                 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -270,7 +272,7 @@ export default function CookiePolicyPage() {
                 <ul className="list-disc pl-6 mb-6 text-gray-700 space-y-2">
                   <li>Clicking the "Cookie Settings" link in our footer</li>
                   <li>Clearing your browser cookies</li>
-                  <li>Contacting us directly at privacy@siriusglobalventures.com</li>
+                  <li>Contacting us directly at privacy@quantumwaveholdings.com</li>
                 </ul>
               </section>
 
@@ -302,8 +304,8 @@ export default function CookiePolicyPage() {
                   If you have any questions about our use of cookies, please contact us at:
                 </p>
                 <div className="bg-gray-50 p-6 rounded-xl">
-                  <p className="text-gray-900 font-semibold mb-2">Sirius Global Ventures</p>
-                  <p className="text-gray-700">Email: privacy@siriusglobalventures.com</p>
+                  <p className="text-gray-900 font-semibold mb-2">Quantum Wave Holdings</p>
+                  <p className="text-gray-700">Email: privacy@quantumwaveholdings.com</p>
                   <p className="text-gray-700">Phone: +1 (555) 123-4567</p>
                   <p className="text-gray-700">Address: 123 Investment Street, Suite 456, New York, NY 10001</p>
                 </div>

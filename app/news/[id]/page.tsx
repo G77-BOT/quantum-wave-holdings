@@ -87,11 +87,11 @@ export default function NewsArticlePage() {
           <div className="flex items-center justify-between">
             <Link href="/" className="flex items-center space-x-3">
               <div className="w-10 h-10 bg-gradient-to-r from-blue-600 to-indigo-600 rounded-lg flex items-center justify-center">
-                <span className="text-white font-bold">SGV</span>
+                <span className="text-white font-bold">QWH</span>
               </div>
               <div>
                 <h1 className="text-xl font-bold bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent">
-                  Sirius Global Ventures
+                  Quantum Wave Holdings
                 </h1>
                 <p className="text-xs text-gray-500">Corporate Excellence</p>
               </div>
@@ -182,7 +182,7 @@ export default function NewsArticlePage() {
 
         {/* Related Articles */}
         <div className="mt-12">
-          <h2 className="text-2xl font-bold text-gray-900 mb-6">More from Sirius Global Ventures</h2>
+          <h2 className="text-2xl font-bold text-gray-900 mb-6">More from Quantum Wave Holdings</h2>
           <div className="text-center py-8 bg-white rounded-xl border border-gray-100">
             <p className="text-gray-600">More articles coming soon...</p>
             <Link

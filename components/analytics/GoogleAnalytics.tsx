@@ -2,10 +2,10 @@
 
 import Script from 'next/script';
 import { usePathname, useSearchParams } from 'next/navigation';
-import { useEffect } from 'react';
+import { useEffect, Suspense } from 'react';
 import { GA_MEASUREMENT_ID, pageview } from '@/lib/analytics';
 
-export default function GoogleAnalytics() {
+function GoogleAnalyticsInner() {
   const pathname = usePathname();
   const searchParams = useSearchParams();
 
@@ -16,12 +16,20 @@ export default function GoogleAnalytics() {
     pageview(url);
   }, [pathname, searchParams]);
 
+  return null;
+}
+
+export default function GoogleAnalytics() {
+
   if (!GA_MEASUREMENT_ID) {
     return null;
   }
 
   return (
     <>
+      <Suspense fallback={null}>
+        <GoogleAnalyticsInner />
+      </Suspense>
       {/* Global Site Tag (gtag.js) - Google Analytics */}
       <Script
         strategy="afterInteractive"

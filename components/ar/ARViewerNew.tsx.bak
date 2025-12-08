@@ -5,7 +5,6 @@ import * as THREE from 'three';
 import { Canvas, useThree, useFrame } from '@react-three/fiber';
 import { OrbitControls, Text, useGLTF } from '@react-three/drei';
 import { XR, ARButton, useXR, XRButton } from '@react-three/xr';
-import { XRSessionMode } from 'three';
 
 // Extend Three.js types
 declare module 'three' {
@@ -109,7 +108,7 @@ function ARScene({
 
   // Auto-rotate controls
   useFrame(() => {
-    if (controlsRef.current && autoRotate && !xr.isPresenting) {
+    if (controlsRef.current && autoRotate) {
       controlsRef.current.update();
     }
   });
@@ -289,7 +288,7 @@ export default function ARViewer({
         {isARSupported && showARButton && !isLoading && !error && (
           <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 z-20">
             <XRButton
-              mode={'immersive-ar' as XRSessionMode}
+              mode={'immersive-ar'}
               sessionInit={{
                 optionalFeatures: [
                   'local-floor',

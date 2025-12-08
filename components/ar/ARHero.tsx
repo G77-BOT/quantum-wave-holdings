@@ -58,7 +58,7 @@ export default function ARHero({
     }
   };
 
-  const itemVariants = {
+  const itemVariants: any = {
     hidden: { 
       opacity: 0, 
       y: 30,
@@ -169,17 +169,13 @@ export default function ARHero({
         >
           {primaryAction && (
             <Link href={primaryAction.href}>
-              <ARButton variant="primary" size="lg" glowColor="#3b82f6">
-                {primaryAction.text}
-              </ARButton>
+              <ARButton label={primaryAction.text} variant="default" size="lg" glowColor="#3b82f6" />
             </Link>
           )}
           
           {secondaryAction && (
             <Link href={secondaryAction.href}>
-              <ARButton variant="secondary" size="lg" glowColor="#6366f1">
-                {secondaryAction.text}
-              </ARButton>
+              <ARButton label={secondaryAction.text} variant="outline" size="lg" glowColor="#6366f1" />
             </Link>
           )}
         </motion.div>

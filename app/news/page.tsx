@@ -1,4 +1,6 @@
 'use client';
+export const dynamic = 'force-dynamic';
+
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { ArrowLeft, Calendar, Tag, Search, User } from 'lucide-react';
@@ -76,11 +78,11 @@ export default function NewsPage() {
           <div className="flex items-center justify-between">
             <Link href="/" className="flex items-center space-x-3">
               <div className="w-10 h-10 bg-gradient-to-r from-blue-600 to-indigo-600 rounded-lg flex items-center justify-center">
-                <span className="text-white font-bold">SGV</span>
+                <span className="text-white font-bold">QWH</span>
               </div>
               <div>
                 <h1 className="text-xl font-bold bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent">
-                  Sirius Global Ventures
+                  Quantum Wave Holdings
                 </h1>
                 <p className="text-xs text-gray-500">Corporate Excellence</p>
               </div>
@@ -108,7 +110,7 @@ export default function NewsPage() {
           </div>
           <h1 className="text-4xl md:text-5xl font-bold mb-4">News & Updates</h1>
           <p className="text-xl text-blue-100 max-w-2xl">
-            Stay informed about the latest developments from Sirius Global Ventures and our portfolio companies.
+            Stay informed about the latest developments from Quantum Wave Holdings and our portfolio companies.
           </p>
         </div>
       </section>

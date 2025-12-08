@@ -1,6 +1,8 @@
 'use client';
 
 import Link from 'next/link';
+
+export const dynamic = 'force-dynamic';
 import { useState, useEffect } from 'react';
 import { 
   Building, 
@@ -161,11 +163,11 @@ export default function AdminDashboard() {
             <div className="flex items-center">
               <Link href="/" className="flex items-center space-x-3">
                 <div className="w-8 h-8 bg-gradient-to-r from-blue-600 to-indigo-600 rounded-lg flex items-center justify-center">
-                  <span className="text-white font-bold text-sm">SGV</span>
+                  <span className="text-white font-bold text-sm">QWH</span>
                 </div>
                 <div>
                   <h1 className="text-lg font-bold text-gray-900">Admin Dashboard</h1>
-                  <p className="text-xs text-gray-500">Sirius Global Ventures</p>
+                  <p className="text-xs text-gray-500">Quantum Wave Holdings</p>
                 </div>
               </Link>
             </div>

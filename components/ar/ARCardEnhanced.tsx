@@ -188,7 +188,7 @@ const ARCardEnhanced: React.FC<ARCardEnhancedProps> = ({
       initial={{ scale: 1 }}
       whileHover={{ scale: animationConfig.hoverScale || 1.05 }}
       whileTap={{ scale: animationConfig.tapScale || 0.98 }}
-      transition={animationConfig.transition}
+      transition={animationConfig.transition as any}
       {...props}
     >
       <div className="relative w-full h-64">

@@ -77,7 +77,7 @@ export default function Home() {
               </span>
             </h1>
             <p className="max-w-3xl mx-auto text-xl text-gray-600 dark:text-gray-300 leading-relaxed mb-8">
-              Sirius Global Ventures is a holding company that builds, acquires, and grows innovative companies 
+              Quantum Wave Holdings is a holding company that builds, acquires, and grows innovative companies 
               across multiple industries. We partner with visionary entrepreneurs to create lasting value.
             </p>
             <div className="flex flex-col sm:flex-row justify-center gap-4">
@@ -264,7 +264,7 @@ export default function Home() {
                 Corporate News • 2 days ago
               </div>
               <h4 className="text-lg font-semibold text-gray-900 dark:text-white mb-2">
-                Sirius Global Ventures Announces Strategic Partnership
+                Quantum Wave Holdings Announces Strategic Partnership
               </h4>
               <p className="text-gray-600 dark:text-gray-300 text-sm">
                 New partnership aims to accelerate growth across our portfolio companies...
@@ -348,10 +348,10 @@ export default function Home() {
             <div className="col-span-1 md:col-span-2">
               <div className="flex items-center space-x-3 mb-6">
                 <div className="w-12 h-12 bg-gradient-to-r from-blue-600 to-indigo-600 rounded-xl flex items-center justify-center">
-                  <span className="text-white font-bold text-lg">SGV</span>
+                  <span className="text-white font-bold text-lg">QWH</span>
                 </div>
                 <div>
-                  <h3 className="text-xl font-bold">Sirius Global Ventures</h3>
+                  <h3 className="text-xl font-bold">Quantum Wave Holdings</h3>
                   <p className="text-sm text-gray-400">Corporate Excellence</p>
                 </div>
               </div>
@@ -373,7 +373,7 @@ export default function Home() {
             <div>
               <h4 className="text-lg font-semibold mb-4">Portfolio</h4>
               <ul className="space-y-2 text-gray-400">
-                <li><a href="https://bostream.ca" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">Bostream</a></li>
+                <li><a href="https://botstream.ca" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">Bostream</a></li>
                 <li><Link href="#news" className="hover:text-white transition-colors">News</Link></li>
                 <li><Link href="/investor-relations" className="hover:text-white transition-colors">Investors</Link></li>
               </ul>
@@ -381,7 +381,7 @@ export default function Home() {
           </div>
           
           <div className="border-t border-gray-800 mt-12 pt-8 text-center text-gray-400">
-            <p>&copy; 2024 Sirius Global Ventures. All rights reserved.</p>
+            <p>&copy; 2024 Quantum Wave Holdings. All rights reserved.</p>
           </div>
         </div>
       </footer>

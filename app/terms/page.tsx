@@ -32,8 +32,8 @@ export default function TermsOfServicePage() {
                   Agreement to Terms
                 </h2>
                 <p className="text-gray-700 leading-relaxed">
-                  These Terms of Service ("Terms") govern your use of the Sirius Global Ventures website 
-                  and services provided by Sirius Global Ventures ("Company," "we," "us," or "our"). 
+                  These Terms of Service ("Terms") govern your use of the Quantum Wave Holdings website 
+                  and services provided by Quantum Wave Holdings ("Company," "we," "us," or "our"). 
                   By accessing or using our services, you agree to be bound by these Terms and our Privacy Policy.
                 </p>
               </section>
@@ -44,7 +44,7 @@ export default function TermsOfServicePage() {
                   Description of Services
                 </h2>
                 <p className="text-gray-700 mb-4">
-                  Sirius Global Ventures is a venture capital firm that provides investment services 
+                  Quantum Wave Holdings is a venture capital firm that provides investment services 
                   and related financial advisory services. Our services include:
                 </p>
                 <ul className="list-disc pl-6 mb-6 text-gray-700 space-y-2">
@@ -126,7 +126,7 @@ export default function TermsOfServicePage() {
                 <p className="text-gray-700 mb-4">
                   All content on our website and in our materials, including but not limited to text, 
                   graphics, logos, images, software, and data compilations, is owned by or licensed to 
-                  Sirius Global Ventures and is protected by intellectual property laws.
+                  Quantum Wave Holdings and is protected by intellectual property laws.
                 </p>
                 <p className="text-gray-700 mb-4">
                   You may not reproduce, distribute, modify, or create derivative works of our content 
@@ -153,7 +153,7 @@ export default function TermsOfServicePage() {
                 <div className="bg-yellow-50 border border-yellow-200 p-6 rounded-xl mb-6">
                   <p className="text-yellow-800 font-semibold mb-2">LIABILITY LIMITATION</p>
                   <p className="text-yellow-700 text-sm leading-relaxed">
-                    To the maximum extent permitted by law, Sirius Global Ventures shall not be liable 
+                    To the maximum extent permitted by law, Quantum Wave Holdings shall not be liable 
                     for any indirect, incidental, special, consequential, or punitive damages.
                   </p>
                 </div>
@@ -168,7 +168,7 @@ export default function TermsOfServicePage() {
               <section className="mb-12">
                 <h2 className="text-2xl font-bold text-gray-900 mb-4">Indemnification</h2>
                 <p className="text-gray-700 mb-4">
-                  You agree to indemnify and hold harmless Sirius Global Ventures, its affiliates, 
+                  You agree to indemnify and hold harmless Quantum Wave Holdings, its affiliates, 
                   officers, directors, employees, and agents from any claims, damages, losses, or 
                   expenses arising from:
                 </p>
@@ -252,8 +252,8 @@ export default function TermsOfServicePage() {
                   If you have any questions about these Terms of Service, please contact us at:
                 </p>
                 <div className="bg-gray-50 p-6 rounded-xl">
-                  <p className="text-gray-900 font-semibold mb-2">Sirius Global Ventures</p>
-                  <p className="text-gray-700">Email: legal@siriusglobalventures.com</p>
+                  <p className="text-gray-900 font-semibold mb-2">Quantum Wave Holdings</p>
+                  <p className="text-gray-700">Email: legal@quantumwaveholdings.com</p>
                   <p className="text-gray-700">Phone: +1 (555) 123-4567</p>
                   <p className="text-gray-700">Address: 123 Investment Street, Suite 456, New York, NY 10001</p>
                 </div>

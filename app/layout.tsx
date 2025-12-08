@@ -11,7 +11,7 @@ import GoogleAnalytics from '@/components/analytics/GoogleAnalytics';
 const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
-  title: 'Sirius Global Ventures',
+  title: 'Quantum Wave Holdings',
   description: 'Transforming ideas into reality',
 };
 

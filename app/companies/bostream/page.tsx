@@ -11,11 +11,11 @@ export default function BostreamPage() {
           <div className="flex items-center justify-between">
             <Link href="/" className="flex items-center space-x-3">
               <div className="w-10 h-10 bg-gradient-to-r from-blue-600 to-indigo-600 rounded-lg flex items-center justify-center">
-                <span className="text-white font-bold">SGV</span>
+                <span className="text-white font-bold">QWH</span>
               </div>
               <div>
                 <h1 className="text-xl font-bold bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent">
-                  Sirius Global Ventures
+                  Quantum Wave Holdings
                 </h1>
                 <p className="text-xs text-gray-500">Corporate Excellence</p>
               </div>
@@ -24,7 +24,7 @@ export default function BostreamPage() {
               <Link href="/" className="text-gray-600 hover:text-blue-600 font-medium transition-colors">
                 Home
               </Link>
-              <a href="https://bostream.ca" target="_blank" rel="noopener noreferrer" className="text-gray-600 hover:text-blue-600 font-medium transition-colors">
+              <a href="https://botstream.ca" target="_blank" rel="noopener noreferrer" className="text-gray-600 hover:text-blue-600 font-medium transition-colors">
                 Visit Bostream
               </a>
             </nav>
@@ -60,7 +60,7 @@ export default function BostreamPage() {
                 </p>
                 <div className="flex flex-col sm:flex-row gap-4">
                   <a
-                    href="https://bostream.ca"
+                    href="https://botstream.ca"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="inline-flex items-center px-6 py-3 bg-white text-blue-600 font-medium rounded-xl hover:bg-gray-100 transition-colors"
@@ -293,7 +293,7 @@ export default function BostreamPage() {
           </p>
           <div className="flex flex-col sm:flex-row justify-center gap-4">
             <a
-              href="https://bostream.ca"
+              href="https://botstream.ca"
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center px-8 py-4 bg-white text-blue-600 font-medium rounded-xl hover:bg-gray-100 transition-colors"

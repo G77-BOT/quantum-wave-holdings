@@ -1,7 +1,7 @@
 import { Schema, model, models, Document } from 'mongoose';
 
 export interface IJob extends Document {
-  _id: string;
+  _id: any;
   title: string;
   department: string;
   location: string;

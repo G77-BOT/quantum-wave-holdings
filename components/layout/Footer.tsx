@@ -52,9 +52,9 @@ export default function Footer() {
           <div className="sm:col-span-2 lg:col-span-2">
             <div className="flex items-center space-x-3 mb-4">
               <div className="w-10 h-10 flex-shrink-0 bg-gradient-to-r from-blue-600 to-indigo-600 rounded-lg flex items-center justify-center">
-                <span className="text-white font-bold text-sm">SGV</span>
+                <span className="text-white font-bold text-sm">QWH</span>
               </div>
-              <h3 className="text-lg sm:text-xl font-bold">Sirius Global Ventures</h3>
+              <h3 className="text-lg sm:text-xl font-bold">Quantum Wave Holdings</h3>
             </div>
             <p className="text-gray-300 text-sm mb-4 sm:mb-6">
               Transforming ideas into reality through strategic investments and innovative solutions.
@@ -68,8 +68,8 @@ export default function Footer() {
             <div className="space-y-3">
               <div className="flex items-center text-gray-300">
                 <Mail className="w-4 h-4 mr-3 text-blue-400" />
-                <a href="mailto:contact@siriusglobalventures.com" className="hover:text-white transition-colors">
-                  contact@siriusglobalventures.com
+                <a href="mailto:contact@quantumwaveholdings.com" className="hover:text-white transition-colors">
+                  contact@quantumwaveholdings.com
                 </a>
               </div>
               <div className="flex items-center text-gray-300">
@@ -203,7 +203,7 @@ export default function Footer() {
         <div className="mt-8 sm:mt-12 pt-6 sm:pt-8 border-t border-gray-800">
           <div className="flex flex-col sm:flex-row justify-between items-center text-center sm:text-left">
             <p className="text-gray-400 text-xs sm:text-sm">
-              &copy; {new Date().getFullYear()} Sirius Global Ventures. All rights reserved.
+              &copy; {new Date().getFullYear()} Quantum Wave Holdings. All rights reserved.
             </p>
             <div className="mt-4 sm:mt-0 flex space-x-6">
               <p className="text-gray-500 text-sm">

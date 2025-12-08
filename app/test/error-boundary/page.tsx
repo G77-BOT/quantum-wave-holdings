@@ -42,9 +42,3 @@ export default function ErrorBoundaryTestPage() {
     </div>
   );
 }
-
-// Add metadata for the page
-export const metadata = {
-  title: 'Error Boundary Test | Sirius Global Ventures',
-  description: 'Test page for error boundary implementation',
-};

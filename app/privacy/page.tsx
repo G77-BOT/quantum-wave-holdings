@@ -14,7 +14,7 @@ export default function PrivacyPolicyPage() {
                 <Shield className="w-16 h-16 mx-auto mb-6 text-blue-100" />
                 <h1 className="text-4xl md:text-5xl font-bold mb-6">Privacy Policy</h1>
                 <p className="text-xl text-blue-100 max-w-3xl mx-auto leading-relaxed">
-                  Your privacy is important to us. This policy explains how Sirius Global Ventures 
+                  Your privacy is important to us. This policy explains how Quantum Wave Holdings 
                   collects, uses, and protects your personal information.
                 </p>
                 <p className="text-blue-200 mt-4">Last updated: {lastUpdated}</p>
@@ -32,7 +32,7 @@ export default function PrivacyPolicyPage() {
                   Overview
                 </h2>
                 <p className="text-gray-700 leading-relaxed">
-                  Sirius Global Ventures ("we," "us," or "our") is committed to protecting your privacy. 
+                  Quantum Wave Holdings ("we," "us," or "our") is committed to protecting your privacy. 
                   This Privacy Policy explains how we collect, use, disclose, and safeguard your information 
                   when you visit our website, use our services, or interact with us in any way.
                 </p>
@@ -196,8 +196,8 @@ export default function PrivacyPolicyPage() {
                   please contact us at:
                 </p>
                 <div className="bg-gray-50 p-6 rounded-xl">
-                  <p className="text-gray-900 font-semibold mb-2">Sirius Global Ventures</p>
-                  <p className="text-gray-700">Email: privacy@siriusglobalventures.com</p>
+                  <p className="text-gray-900 font-semibold mb-2">Quantum Wave Holdings</p>
+                  <p className="text-gray-700">Email: privacy@quantumwaveholdings.com</p>
                   <p className="text-gray-700">Phone: +1 (555) 123-4567</p>
                   <p className="text-gray-700">Address: 123 Investment Street, Suite 456, New York, NY 10001</p>
                 </div>

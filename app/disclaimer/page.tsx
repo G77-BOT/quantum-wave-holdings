@@ -129,7 +129,7 @@ export default function DisclaimerPage() {
                 <div className="bg-yellow-50 border border-yellow-200 p-6 rounded-xl mb-6">
                   <p className="text-yellow-800 font-semibold mb-2">LIABILITY LIMITATION</p>
                   <p className="text-yellow-700 text-sm leading-relaxed">
-                    To the maximum extent permitted by law, Sirius Global Ventures disclaims all 
+                    To the maximum extent permitted by law, Quantum Wave Holdings disclaims all 
                     liability for any direct, indirect, incidental, consequential, or punitive damages 
                     arising from your use of this website or our services.
                   </p>
@@ -152,7 +152,7 @@ export default function DisclaimerPage() {
 
                 <h3 className="text-xl font-semibold text-gray-900 mb-3">SEC Registration</h3>
                 <p className="text-gray-700 mb-6">
-                  Sirius Global Ventures will be a registered investment adviser with the U.S. Securities 
+                  Quantum Wave Holdings will be a registered investment adviser with the U.S. Securities 
                   and Exchange Commission (SEC). Registration does not imply a certain level of skill 
                   or training or endorsement by the SEC.
                 </p>
@@ -243,8 +243,8 @@ export default function DisclaimerPage() {
                   any of the statements contained herein, please contact us:
                 </p>
                 <div className="bg-gray-50 p-6 rounded-xl">
-                  <p className="text-gray-900 font-semibold mb-2">Sirius Global Ventures</p>
-                  <p className="text-gray-700">Email: legal@siriusglobalventures.com</p>
+                  <p className="text-gray-900 font-semibold mb-2">Quantum Wave Holdings</p>
+                  <p className="text-gray-700">Email: legal@quantumwaveholdings.com</p>
                   <p className="text-gray-700">Phone: +1 (555) 123-4567</p>
                   <p className="text-gray-700">Address: 123 Investment Street, Suite 456, New York, NY 10001</p>
                 </div>

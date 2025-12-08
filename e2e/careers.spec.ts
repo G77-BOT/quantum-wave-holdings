@@ -6,7 +6,7 @@ test.describe('Careers Page', () => {
     await page.goto('/careers');
     
     // Check that the page title is correct
-    await expect(page).toHaveTitle(/Careers at Sirius Global Ventures/);
+    await expect(page).toHaveTitle(/Careers at Quantum Wave Holdings/);
     
     // Check that the careers heading is visible
     await expect(page.getByRole('heading', { name: /join our team/i })).toBeVisible();

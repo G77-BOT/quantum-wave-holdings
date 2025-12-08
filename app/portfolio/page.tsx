@@ -1,4 +1,6 @@
 'use client';
+export const dynamic = 'force-dynamic';
+
 
 import Link from 'next/link';
 import { useState, useEffect } from 'react';
@@ -49,7 +51,7 @@ export default function PortfolioPage() {
             slug: 'botstream',
             description: 'Advanced cryptocurrency trading platform featuring real-time data streaming, professional analytics, and institutional-grade security for modern traders.',
             shortDescription: 'AI-powered cryptocurrency trading platform with access to 14+ exchanges',
-            website: 'https://bostream.ca',
+            website: 'https://botstream.ca',
             logo: '/images/companies/botstream-logo.png',
             industry: 'FinTech',
             founded: '2024',
