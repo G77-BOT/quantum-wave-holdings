@@ -7,6 +7,7 @@ import Header from '@/components/layout/Header';
 import Footer from '@/components/layout/Footer';
 import GlobalErrorBoundary from './GlobalErrorBoundary';
 import GoogleAnalytics from '@/components/analytics/GoogleAnalytics';
+import { SpeedInsights } from "@vercel/speed-insights/next"
 
 const inter = Inter({ subsets: ['latin'] });
 
