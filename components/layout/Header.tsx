@@ -76,26 +76,28 @@ export default function Header() {
           {/* Desktop Navigation */}
           <div className="hidden lg:flex lg:space-x-2 xl:space-x-4">
             {navigation.map((item) => (
-              <div key={item.name} className="relative group">
+              <div 
+                key={item.name} 
+                className="relative group"
+                onMouseEnter={() => item.children && setDropdownOpen(item.name)}
+                onMouseLeave={() => item.children && setDropdownOpen(null)}
+              >
                 <Link
                   href={item.href}
                   className="text-gray-700 dark:text-gray-200 hover:text-blue-600 dark:hover:text-blue-400 px-2 py-2 text-sm font-medium transition-colors duration-200 flex items-center"
-                  onMouseEnter={() => item.children && setDropdownOpen(item.name)}
-                  onMouseLeave={() => item.children && setDropdownOpen(null)}
-                  onClick={() => setDropdownOpen(null)}
                 >
                   {item.name}
                   {item.children && (
                     <ChevronDown className="ml-1 h-4 w-4 flex-shrink-0" />
                   )}
                 </Link>
-                {item.children && (
+                {item.children && dropdownOpen === item.name && (
                   <div className="absolute top-full left-0 mt-2 w-48 bg-white dark:bg-gray-800 rounded-lg shadow-lg border border-gray-100 dark:border-gray-700 py-2 z-50">
                     {item.children.map((child) => (
                       <Link
                         key={child.name}
                         href={child.href}
-                        className="block px-4 py-2 text-gray-700 dark:text-gray-300 hover:bg-blue-50 dark:hover:bg-blue-900/50 hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
+                        className="block px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-blue-50 dark:hover:bg-blue-900/50 hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
                       >
                         {child.name}
                       </Link>
