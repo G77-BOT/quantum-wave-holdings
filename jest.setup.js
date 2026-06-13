@@ -1,3 +1,9 @@
+import { Request, Response } from 'undici';
+Object.assign(global, { Request, Response });
+
+import { TextEncoder, TextDecoder } from 'util';
+Object.assign(global, { TextEncoder, TextDecoder });
+
 // Learn more: https://github.com/testing-library/jest-dom
 import '@testing-library/jest-dom';
 
