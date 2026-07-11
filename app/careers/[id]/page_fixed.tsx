@@ -52,6 +52,8 @@ export default function CareerDetailPage({ params }: PageProps) {
       try {
         // Mock job data - in a real application, this would come from an API
         const jobs: Job[] = [
+
+
           {
             id: 1,
             title: "Senior Backend Developer",
@@ -91,7 +93,7 @@ export default function CareerDetailPage({ params }: PageProps) {
           {
             id: 2,
             title: "DevOps Engineer",
-            department: "Infrastructure", 
+            department: "Infrastructure",
             location: "Remote",
             type: "Full-time",
             description: "Help us maintain and scale our high-availability cryptocurrency platform. You'll be responsible for infrastructure automation, monitoring, and ensuring 99.9% uptime across our global operations.",
@@ -166,7 +168,7 @@ export default function CareerDetailPage({ params }: PageProps) {
             <ArrowLeft className="w-5 h-5 mr-2" />
             Back to Careers
           </Link>
-          
+
           <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-xl border border-gray-100 dark:border-gray-700 p-8 text-center">
             <div className="text-6xl mb-4">😕</div>
             <h1 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">Job Not Found</h1>
@@ -277,7 +279,7 @@ export default function CareerDetailPage({ params }: PageProps) {
                     required
                     className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent dark:bg-gray-700 dark:text-white"
                     value={applicationData.name}
-                    onChange={(e) => setApplicationData({...applicationData, name: e.target.value})}
+                    onChange={(e) => setApplicationData({ ...applicationData, name: e.target.value })}
                   />
                 </div>
                 <div>
@@ -289,7 +291,7 @@ export default function CareerDetailPage({ params }: PageProps) {
                     required
                     className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent dark:bg-gray-700 dark:text-white"
                     value={applicationData.email}
-                    onChange={(e) => setApplicationData({...applicationData, email: e.target.value})}
+                    onChange={(e) => setApplicationData({ ...applicationData, email: e.target.value })}
                   />
                 </div>
               </div>
@@ -303,7 +305,7 @@ export default function CareerDetailPage({ params }: PageProps) {
                     type="tel"
                     className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent dark:bg-gray-700 dark:text-white"
                     value={applicationData.phone}
-                    onChange={(e) => setApplicationData({...applicationData, phone: e.target.value})}
+                    onChange={(e) => setApplicationData({ ...applicationData, phone: e.target.value })}
                   />
                 </div>
                 <div>
@@ -315,7 +317,7 @@ export default function CareerDetailPage({ params }: PageProps) {
                     className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent dark:bg-gray-700 dark:text-white"
                     placeholder="https://linkedin.com/in/..."
                     value={applicationData.linkedIn}
-                    onChange={(e) => setApplicationData({...applicationData, linkedIn: e.target.value})}
+                    onChange={(e) => setApplicationData({ ...applicationData, linkedIn: e.target.value })}
                   />
                 </div>
               </div>
@@ -329,7 +331,7 @@ export default function CareerDetailPage({ params }: PageProps) {
                   className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent dark:bg-gray-700 dark:text-white"
                   placeholder="https://your-portfolio.com"
                   value={applicationData.portfolio}
-                  onChange={(e) => setApplicationData({...applicationData, portfolio: e.target.value})}
+                  onChange={(e) => setApplicationData({ ...applicationData, portfolio: e.target.value })}
                 />
               </div>
 
@@ -343,7 +345,7 @@ export default function CareerDetailPage({ params }: PageProps) {
                   className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent dark:bg-gray-700 dark:text-white"
                   placeholder="Tell us why you're interested in this role and what makes you a great fit..."
                   value={applicationData.coverLetter}
-                  onChange={(e) => setApplicationData({...applicationData, coverLetter: e.target.value})}
+                  onChange={(e) => setApplicationData({ ...applicationData, coverLetter: e.target.value })}
                 />
               </div>
 
@@ -356,7 +358,7 @@ export default function CareerDetailPage({ params }: PageProps) {
                   required
                   accept=".pdf,.doc,.docx"
                   className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent dark:bg-gray-700 dark:text-white"
-                  onChange={(e) => setApplicationData({...applicationData, resume: e.target.files?.[0] || null})}
+                  onChange={(e) => setApplicationData({ ...applicationData, resume: e.target.files?.[0] || null })}
                 />
                 <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
                   Accepted formats: PDF, DOC, DOCX (Max size: 10MB)

@@ -29,118 +29,16 @@ export default function CareersPage() {
       try {
         const response = await fetch('/api/jobs');
         const data = await response.json();
-        
-        // Enhanced job data with additional details
-        const enhancedJobs: Job[] = [
-          {
-            id: 1,
-            title: "Senior Backend Developer",
-            department: "Engineering",
-            location: "Remote",
-            type: "Full-time",
-            description: "Join our team to build scalable cryptocurrency data streaming infrastructure. You'll work on high-performance systems that process millions of transactions and data points from multiple exchanges in real-time.",
-            requirements: [
-              "5+ years experience with Node.js and TypeScript",
-              "Experience with distributed systems and microservices",
-              "Knowledge of cryptocurrency exchanges and trading systems",
-              "Proficiency in SQL and NoSQL databases",
-              "Experience with AWS or similar cloud platforms",
-              "Strong understanding of API design and development"
-            ],
-            benefits: [
-              "Competitive salary with equity options",
-              "Comprehensive health, dental, and vision coverage",
-              "Flexible remote work arrangements",
-              "Professional development budget ($5,000/year)",
-              "Latest MacBook Pro and equipment",
-              "Unlimited PTO policy"
-            ],
-            salary: "$120,000 - $180,000",
-            postedDate: "2024-01-15"
-          },
-          {
-            id: 2,
-            title: "DevOps Engineer",
-            department: "Infrastructure",
-            location: "Remote",
-            type: "Full-time",
-            description: "Help us maintain and scale our high-availability cryptocurrency platform. You'll be responsible for infrastructure automation, monitoring, and ensuring 99.9% uptime across our global operations.",
-            requirements: [
-              "3+ years experience with AWS, Docker, and Kubernetes",
-              "Proficiency in infrastructure-as-code tools (Terraform, CloudFormation)",
-              "Experience with CI/CD pipelines and automation",
-              "Knowledge of monitoring tools (Prometheus, Grafana, ELK stack)",
-              "Understanding of security best practices",
-              "Experience with high-traffic, mission-critical systems"
-            ],
-            benefits: [
-              "Competitive salary with performance bonuses",
-              "Stock options in a growing company",
-              "Health and wellness stipend",
-              "Remote-first culture with team retreats",
-              "Top-tier hardware and software tools",
-              "Professional conference attendance"
-            ],
-            salary: "$100,000 - $150,000",
-            postedDate: "2024-01-12"
-          },
-          {
-            id: 3,
-            title: "Product Manager",
-            department: "Product",
-            location: "Remote",
-            type: "Full-time",
-            description: "Lead product strategy for our cryptocurrency streaming and analytics platform. You'll work closely with engineering, design, and business teams to define and execute our product roadmap.",
-            requirements: [
-              "4+ years of product management experience",
-              "Experience in fintech, trading, or cryptocurrency",
-              "Strong analytical and data-driven decision making skills",
-              "Excellent communication and leadership abilities",
-              "Understanding of user experience design principles",
-              "Technical background preferred"
-            ],
-            benefits: [
-              "Competitive salary with significant equity upside",
-              "Comprehensive benefits package",
-              "Flexible PTO and sabbatical opportunities",
-              "Professional coaching and development",
-              "State-of-the-art home office setup",
-              "Team building and wellness activities"
-            ],
-            salary: "$130,000 - $170,000",
-            postedDate: "2024-01-10"
-          },
-          {
-            id: 4,
-            title: "Frontend Developer",
-            department: "Engineering",
-            location: "Remote",
-            type: "Full-time",
-            description: "Build responsive, intuitive user interfaces for our trading platforms. You'll work with React, TypeScript, and modern web technologies to create seamless user experiences.",
-            requirements: [
-              "3+ years experience with React and TypeScript",
-              "Proficiency in modern CSS and responsive design",
-              "Experience with state management (Redux, Zustand)",
-              "Knowledge of testing frameworks (Jest, Cypress)",
-              "Understanding of web performance optimization",
-              "Familiarity with financial or trading applications preferred"
-            ],
-            benefits: [
-              "Competitive salary with growth potential",
-              "Comprehensive health benefits",
-              "Remote work flexibility",
-              "Learning and development budget",
-              "Latest development hardware",
-              "Collaborative and innovative team culture"
-            ],
-            salary: "$90,000 - $140,000",
-            postedDate: "2024-01-08"
-          }
-        ];
-        
-        setJobs(enhancedJobs);
+
+        if (data.success && data.jobs) {
+          setJobs(data.jobs);
+        } else {
+          console.error('Failed to fetch jobs:', data);
+          setJobs([]);
+        }
       } catch (error) {
         console.error('Error fetching jobs:', error);
+        setJobs([]);
       } finally {
         setLoading(false);
       }
@@ -150,8 +48,8 @@ export default function CareersPage() {
   }, []);
 
   const departments = Array.from(new Set(jobs.map(job => job.department)));
-  const filteredJobs = selectedDepartment === 'all' 
-    ? jobs 
+  const filteredJobs = selectedDepartment === 'all'
+    ? jobs
     : jobs.filter(job => job.department === selectedDepartment);
 
   const companyValues = [
@@ -225,7 +123,7 @@ export default function CareersPage() {
             <div className="text-center">
               <h1 className="text-4xl md:text-5xl font-bold mb-6">Join Our Team</h1>
               <p className="text-xl text-blue-100 max-w-3xl mx-auto leading-relaxed mb-8">
-                Help us shape the future of finance and technology. Build innovative solutions, 
+                Help us shape the future of finance and technology. Build innovative solutions,
                 grow your career, and make a meaningful impact in a fast-growing company.
               </p>
               <div className="flex flex-col sm:flex-row justify-center gap-4 text-sm">
@@ -382,7 +280,7 @@ export default function CareersPage() {
         <section className="mt-12 bg-gradient-to-r from-blue-600 to-indigo-600 text-white rounded-2xl p-8 text-center">
           <h2 className="text-3xl font-bold mb-4">Don't See the Right Role?</h2>
           <p className="text-xl text-blue-100 mb-8 max-w-2xl mx-auto">
-            We're always looking for talented individuals to join our team. 
+            We're always looking for talented individuals to join our team.
             Send us your resume and we'll keep you in mind for future opportunities.
           </p>
           <div className="flex flex-col sm:flex-row justify-center gap-4">

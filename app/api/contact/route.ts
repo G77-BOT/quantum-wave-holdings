@@ -1,19 +1,19 @@
-import { NextResponse } from 'next/server';
+import { NextRequest, NextResponse } from 'next/server';
 
 export async function GET() {
   const contact = {
-    company: "CryptoBostream",
-    email: "contact@cryptobostream.com",
+    company: "Quantum Wave Holdings",
+    email: "contact@quantumwaveholdings.com",
     phone: "+1 (555) 123-4567",
     address: {
-      street: "123 Crypto Street",
-      city: "San Francisco",
-      state: "CA",
-      zip: "94105",
+      street: "123 Innovation Street",
+      city: "New York",
+      state: "NY",
+      zip: "10001",
       country: "USA"
     },
     support: {
-      email: "support@cryptobostream.com",
+      email: "support@quantumwaveholdings.com",
       hours: "24/7"
     }
   };
@@ -21,7 +21,7 @@ export async function GET() {
   return NextResponse.json({ contact });
 }
 
-export async function POST(request: Request) {
+export async function POST(request: NextRequest) {
   try {
     const body = await request.json();
     

@@ -1,4 +1,4 @@
-import { GET } from '@/api/news/route'; // Adjust the import path as needed
+import { GET } from '@/app/api/news/route';
 import { NextResponse } from 'next/server';
 
 describe('News API', () => {

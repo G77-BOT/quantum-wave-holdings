@@ -4,6 +4,70 @@ import { NextRequest, NextResponse } from 'next/server';
 const jobs = [
   {
     id: 1,
+    title: "Senior Backend Developer",
+    department: "Engineering",
+    location: "Remote",
+    type: "Full-time",
+    description: "Join our team to build scalable cryptocurrency data streaming infrastructure. You'll work on high-performance systems that process millions of transactions and data points from multiple exchanges in real-time.",
+    requirements: [
+      "5+ years experience with Node.js and TypeScript",
+      "Experience with distributed systems and microservices",
+      "Knowledge of cryptocurrency exchanges and trading systems",
+      "Proficiency in SQL and NoSQL databases",
+      "Experience with AWS or similar cloud platforms",
+      "Strong understanding of API design and development"
+    ],
+    responsibilities: [
+      "Design and implement scalable backend services",
+      "Optimize database performance and query efficiency",
+      "Build and maintain real-time data processing pipelines",
+      "Collaborate with frontend developers on API design",
+      "Implement comprehensive testing and monitoring",
+      "Participate in code reviews and technical discussions"
+    ],
+    benefits: [
+      "Competitive salary with equity options",
+      "Comprehensive health, dental, and vision coverage",
+      "Flexible remote work arrangements",
+      "Professional development budget ($5,000/year)",
+      "Latest MacBook Pro and equipment",
+      "Unlimited PTO policy"
+    ],
+    salary: "$120,000 - $180,000",
+    experience: "5+ years",
+    postedDate: "2024-01-15",
+    applicationDeadline: "2024-04-15"
+  },
+
+  {
+    id: 2,
+    title: "DevOps Engineer",
+    department: "Infrastructure",
+    location: "Remote",
+    type: "Full-time",
+    description: "Help us maintain and scale our high-availability cryptocurrency platform. You'll be responsible for infrastructure automation, monitoring, and ensuring 99.9% uptime across our global operations.",
+    requirements: [
+      "3+ years experience with AWS, Docker, and Kubernetes",
+      "Proficiency in infrastructure-as-code tools (Terraform, CloudFormation)",
+      "Experience with CI/CD pipelines and automation",
+      "Knowledge of monitoring tools (Prometheus, Grafana, ELK stack)",
+      "Understanding of security best practices",
+      "Experience with high-traffic, mission-critical systems"
+    ],
+    benefits: [
+      "Competitive salary with performance bonuses",
+      "Stock options in a growing company",
+      "Health and wellness stipend",
+      "Remote-first culture with team retreats",
+      "Top-tier hardware and software tools",
+      "Professional conference attendance"
+    ],
+    salary: "$100,000 - $150,000",
+    postedDate: "2024-01-12"
+  },
+
+  {
+    id: 9,
     title: "Investment Analyst",
     department: "Investments",
     location: "New York, NY",
@@ -30,7 +94,7 @@ const jobs = [
     featured: true
   },
   {
-    id: 2,
+    id: 4,
     title: "Senior Frontend Developer",
     department: "Technology",
     location: "Remote",
@@ -84,7 +148,7 @@ const jobs = [
     featured: false
   },
   {
-    id: 4,
+    id: 7,
     title: "Data Scientist",
     department: "Technology",
     location: "New York, NY / Remote",
@@ -169,7 +233,7 @@ const jobs = [
 export async function GET(request: NextRequest) {
   try {
     const { searchParams } = new URL(request.url);
-    
+
     // Get query parameters
     const department = searchParams.get('department');
     const location = searchParams.get('location');
@@ -183,26 +247,26 @@ export async function GET(request: NextRequest) {
 
     // Apply filters
     if (department) {
-      filteredJobs = filteredJobs.filter(job => 
+      filteredJobs = filteredJobs.filter(job =>
         job.department.toLowerCase().includes(department.toLowerCase())
       );
     }
 
     if (location) {
-      filteredJobs = filteredJobs.filter(job => 
+      filteredJobs = filteredJobs.filter(job =>
         job.location.toLowerCase().includes(location.toLowerCase())
       );
     }
 
     if (type) {
-      filteredJobs = filteredJobs.filter(job => 
+      filteredJobs = filteredJobs.filter(job =>
         job.type.toLowerCase() === type.toLowerCase()
       );
     }
 
     if (experience) {
-      filteredJobs = filteredJobs.filter(job => 
-        job.experience.toLowerCase().includes(experience.toLowerCase())
+      filteredJobs = filteredJobs.filter(job =>
+        job.experience?.toLowerCase().includes(experience.toLowerCase())
       );
     }
 
@@ -212,7 +276,7 @@ export async function GET(request: NextRequest) {
 
     if (search) {
       const searchLower = search.toLowerCase();
-      filteredJobs = filteredJobs.filter(job => 
+      filteredJobs = filteredJobs.filter(job =>
         job.title.toLowerCase().includes(searchLower) ||
         job.description.toLowerCase().includes(searchLower) ||
         job.department.toLowerCase().includes(searchLower)
@@ -231,7 +295,9 @@ export async function GET(request: NextRequest) {
     filteredJobs.sort((a, b) => {
       if (a.featured && !b.featured) return -1;
       if (!a.featured && b.featured) return 1;
-      return new Date(b.datePosted).getTime() - new Date(a.datePosted).getTime();
+      const dateA = a.datePosted ? new Date(a.datePosted).getTime() : 0;
+      const dateB = b.datePosted ? new Date(b.datePosted).getTime() : 0;
+      return dateB - dateA;
     });
 
     return NextResponse.json({
@@ -251,8 +317,8 @@ export async function GET(request: NextRequest) {
   } catch (error) {
     console.error('Error fetching jobs:', error);
     return NextResponse.json(
-      { 
-        success: false, 
+      {
+        success: false,
         error: 'Failed to fetch jobs',
         jobs: [],
         total: 0
@@ -265,7 +331,7 @@ export async function GET(request: NextRequest) {
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json();
-    
+
     // Validate required fields
     const requiredFields = ['title', 'department', 'location', 'type', 'description'];
     for (const field of requiredFields) {
@@ -316,7 +382,7 @@ export async function PUT(request: NextRequest) {
   try {
     const { searchParams } = new URL(request.url);
     const id = searchParams.get('id');
-    
+
     if (!id) {
       return NextResponse.json(
         { success: false, error: 'Job ID is required' },
@@ -325,7 +391,7 @@ export async function PUT(request: NextRequest) {
     }
 
     const job = jobs.find(j => j.id === parseInt(id));
-    
+
     if (!job) {
       return NextResponse.json(
         { success: false, error: 'Job not found' },

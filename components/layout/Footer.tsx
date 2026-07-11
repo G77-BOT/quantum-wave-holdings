@@ -226,18 +226,6 @@ export default function Footer() {
                 </a>
               ))}
             </div>
-            {socialLinks.map((item) => (
-              <a
-                key={item.name}
-                href={item.href}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-gray-400 hover:text-white transition-colors"
-                title={item.name}
-              >
-                <item.icon className="w-5 h-5" />
-              </a>
-            ))}
           </div>
         </div>
       </div>

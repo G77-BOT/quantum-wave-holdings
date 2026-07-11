@@ -202,7 +202,7 @@ export default function Home() {
                 
                 <div className="flex items-center justify-between">
                   <Link
-                    href="/api/subsidiaries/1"
+                    href="/companies/bostream"
                     className="inline-flex items-center text-blue-600 font-medium group-hover:translate-x-1 transition-transform"
                   >
                     Learn More
