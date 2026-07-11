@@ -1,234 +1,31 @@
 import { NextRequest, NextResponse } from 'next/server';
+import { db } from '@/lib/db/connection';
+import { jobs } from '@/lib/db/schema';
+import { eq, ilike, and, or, desc } from 'drizzle-orm';
 
-// Mock job data - in a real application, this would come from a database
-const jobs = [
-  {
-    id: 1,
-    title: "Senior Backend Developer",
-    department: "Engineering",
-    location: "Remote",
-    type: "Full-time",
-    description: "Join our team to build scalable cryptocurrency data streaming infrastructure. You'll work on high-performance systems that process millions of transactions and data points from multiple exchanges in real-time.",
-    requirements: [
-      "5+ years experience with Node.js and TypeScript",
-      "Experience with distributed systems and microservices",
-      "Knowledge of cryptocurrency exchanges and trading systems",
-      "Proficiency in SQL and NoSQL databases",
-      "Experience with AWS or similar cloud platforms",
-      "Strong understanding of API design and development"
-    ],
-    responsibilities: [
-      "Design and implement scalable backend services",
-      "Optimize database performance and query efficiency",
-      "Build and maintain real-time data processing pipelines",
-      "Collaborate with frontend developers on API design",
-      "Implement comprehensive testing and monitoring",
-      "Participate in code reviews and technical discussions"
-    ],
-    benefits: [
-      "Competitive salary with equity options",
-      "Comprehensive health, dental, and vision coverage",
-      "Flexible remote work arrangements",
-      "Professional development budget ($5,000/year)",
-      "Latest MacBook Pro and equipment",
-      "Unlimited PTO policy"
-    ],
-    salary: "$120,000 - $180,000",
-    experience: "5+ years",
-    postedDate: "2024-01-15",
-    applicationDeadline: "2024-04-15"
-  },
-
-  {
-    id: 2,
-    title: "DevOps Engineer",
-    department: "Infrastructure",
-    location: "Remote",
-    type: "Full-time",
-    description: "Help us maintain and scale our high-availability cryptocurrency platform. You'll be responsible for infrastructure automation, monitoring, and ensuring 99.9% uptime across our global operations.",
-    requirements: [
-      "3+ years experience with AWS, Docker, and Kubernetes",
-      "Proficiency in infrastructure-as-code tools (Terraform, CloudFormation)",
-      "Experience with CI/CD pipelines and automation",
-      "Knowledge of monitoring tools (Prometheus, Grafana, ELK stack)",
-      "Understanding of security best practices",
-      "Experience with high-traffic, mission-critical systems"
-    ],
-    benefits: [
-      "Competitive salary with performance bonuses",
-      "Stock options in a growing company",
-      "Health and wellness stipend",
-      "Remote-first culture with team retreats",
-      "Top-tier hardware and software tools",
-      "Professional conference attendance"
-    ],
-    salary: "$100,000 - $150,000",
-    postedDate: "2024-01-12"
-  },
-
-  {
-    id: 9,
-    title: "Investment Analyst",
-    department: "Investments",
-    location: "New York, NY",
-    type: "Full-time",
-    description: "Join our investment team to analyze potential opportunities and support portfolio companies.",
-    requirements: [
-      "Bachelor's degree in Finance, Economics, or related field",
-      "2-4 years of experience in investment analysis or consulting",
-      "Strong analytical and financial modeling skills",
-      "Excellent communication and presentation abilities",
-      "CFA designation preferred"
-    ],
-    responsibilities: [
-      "Conduct due diligence on potential investments",
-      "Build financial models and perform valuation analysis",
-      "Support portfolio companies with strategic initiatives",
-      "Prepare investment memos and presentations",
-      "Monitor market trends and competitive landscape"
-    ],
-    datePosted: "2024-02-15",
-    applicationDeadline: "2024-04-15",
-    salaryRange: "$90,000 - $120,000",
-    experience: "2-4 years",
-    featured: true
-  },
-  {
-    id: 4,
-    title: "Senior Frontend Developer",
-    department: "Technology",
-    location: "Remote",
-    type: "Full-time",
-    description: "Lead the development of our investor portal and internal tools using modern web technologies.",
-    requirements: [
-      "Bachelor's degree in Computer Science or equivalent experience",
-      "5+ years of experience in frontend development",
-      "Expertise in React, TypeScript, and modern web technologies",
-      "Experience with responsive design and UI/UX best practices",
-      "Knowledge of financial services or FinTech preferred"
-    ],
-    responsibilities: [
-      "Develop and maintain investor-facing web applications",
-      "Collaborate with design team to implement user interfaces",
-      "Optimize applications for performance and scalability",
-      "Mentor junior developers and conduct code reviews",
-      "Stay current with emerging technologies and best practices"
-    ],
-    datePosted: "2024-02-20",
-    applicationDeadline: "2024-04-20",
-    salaryRange: "$130,000 - $160,000",
-    experience: "5+ years",
-    featured: false
-  },
-  {
-    id: 3,
-    title: "Portfolio Operations Manager",
-    department: "Operations",
-    location: "New York, NY",
-    type: "Full-time",
-    description: "Oversee operational aspects of our portfolio companies and investment processes.",
-    requirements: [
-      "MBA or equivalent advanced degree",
-      "3-5 years of experience in operations or management consulting",
-      "Strong project management and organizational skills",
-      "Experience working with startups or growth companies",
-      "Excellent interpersonal and communication skills"
-    ],
-    responsibilities: [
-      "Support portfolio companies with operational improvements",
-      "Manage investment process workflows and documentation",
-      "Coordinate with external service providers and advisors",
-      "Develop and maintain operational metrics and reporting",
-      "Lead special projects and strategic initiatives"
-    ],
-    datePosted: "2024-02-10",
-    applicationDeadline: "2024-04-10",
-    salaryRange: "$110,000 - $140,000",
-    experience: "3-5 years",
-    featured: false
-  },
-  {
-    id: 7,
-    title: "Data Scientist",
-    department: "Technology",
-    location: "New York, NY / Remote",
-    type: "Full-time",
-    description: "Apply advanced analytics and machine learning to investment decisions and portfolio optimization.",
-    requirements: [
-      "PhD or Master's degree in Data Science, Statistics, or related field",
-      "4+ years of experience in data science or analytics",
-      "Proficiency in Python, R, and SQL",
-      "Experience with machine learning frameworks and cloud platforms",
-      "Background in finance or investment management preferred"
-    ],
-    responsibilities: [
-      "Develop predictive models for investment screening",
-      "Analyze portfolio performance and risk metrics",
-      "Build data pipelines and analytics infrastructure",
-      "Create dashboards and visualization tools",
-      "Research new analytical techniques and methodologies"
-    ],
-    datePosted: "2024-02-25",
-    applicationDeadline: "2024-04-25",
-    salaryRange: "$140,000 - $180,000",
-    experience: "4+ years",
-    featured: true
-  },
-  {
-    id: 5,
-    title: "Marketing Manager",
-    department: "Marketing",
-    location: "New York, NY",
-    type: "Full-time",
-    description: "Drive brand awareness and lead generation through strategic marketing initiatives.",
-    requirements: [
-      "Bachelor's degree in Marketing, Business, or related field",
-      "3-5 years of B2B marketing experience",
-      "Experience in financial services or professional services",
-      "Strong content creation and digital marketing skills",
-      "Proficiency in marketing automation and analytics tools"
-    ],
-    responsibilities: [
-      "Develop and execute marketing strategies and campaigns",
-      "Create content for website, thought leadership, and events",
-      "Manage digital marketing channels and social media presence",
-      "Plan and coordinate industry events and conferences",
-      "Analyze marketing performance and optimize campaigns"
-    ],
-    datePosted: "2024-03-01",
-    applicationDeadline: "2024-05-01",
-    salaryRange: "$85,000 - $110,000",
-    experience: "3-5 years",
-    featured: false
-  },
-  {
-    id: 6,
-    title: "Compliance Officer",
-    department: "Legal & Compliance",
-    location: "New York, NY",
-    type: "Full-time",
-    description: "Ensure compliance with regulatory requirements and manage risk across our investment activities.",
-    requirements: [
-      "JD or relevant compliance certification",
-      "5+ years of compliance experience in investment management",
-      "Knowledge of SEC regulations and investment advisor requirements",
-      "Strong attention to detail and analytical skills",
-      "Experience with compliance monitoring systems"
-    ],
-    responsibilities: [
-      "Monitor compliance with investment advisor regulations",
-      "Develop and maintain compliance policies and procedures",
-      "Conduct compliance testing and audits",
-      "Manage regulatory filings and correspondence",
-      "Provide compliance training to staff"
-    ],
-    datePosted: "2024-01-30",
-    applicationDeadline: "2024-03-30",
-    salaryRange: "$120,000 - $150,000",
-    experience: "5+ years",
-    featured: false
+// Helper to map DB Job to frontend Job
+function mapJob(job: any) {
+  let salary = undefined;
+  if (job.salaryMin && job.salaryMax) {
+    const currencySym = job.salaryCurrency === 'USD' ? '$' : '';
+    salary = `${currencySym}${job.salaryMin.toLocaleString()} - ${currencySym}${job.salaryMax.toLocaleString()}`;
+  } else if (job.salaryMin) {
+    const currencySym = job.salaryCurrency === 'USD' ? '$' : '';
+    salary = `${currencySym}${job.salaryMin.toLocaleString()}+`;
   }
-];
+
+  // Capitalize job type for UI display (e.g. full-time -> Full-time)
+  const displayType = job.type
+    ? job.type.split('-').map((word: string) => word.charAt(0).toUpperCase() + word.slice(1)).join('-')
+    : '';
+
+  return {
+    ...job,
+    type: displayType,
+    salary,
+    postedDate: job.createdAt.toISOString().split('T')[0],
+  };
+}
 
 export async function GET(request: NextRequest) {
   try {
@@ -238,77 +35,62 @@ export async function GET(request: NextRequest) {
     const department = searchParams.get('department');
     const location = searchParams.get('location');
     const type = searchParams.get('type');
-    const experience = searchParams.get('experience');
     const featured = searchParams.get('featured');
     const limit = searchParams.get('limit');
     const search = searchParams.get('search');
 
-    let filteredJobs = [...jobs];
+    const conditions = [];
 
-    // Apply filters
-    if (department) {
-      filteredJobs = filteredJobs.filter(job =>
-        job.department.toLowerCase().includes(department.toLowerCase())
-      );
+    // Only query active jobs by default
+    conditions.push(eq(jobs.status, 'active'));
+
+    if (department && department !== 'all') {
+      conditions.push(ilike(jobs.department, `%${department}%`));
     }
 
     if (location) {
-      filteredJobs = filteredJobs.filter(job =>
-        job.location.toLowerCase().includes(location.toLowerCase())
-      );
+      conditions.push(ilike(jobs.location, `%${location}%`));
     }
 
     if (type) {
-      filteredJobs = filteredJobs.filter(job =>
-        job.type.toLowerCase() === type.toLowerCase()
-      );
-    }
-
-    if (experience) {
-      filteredJobs = filteredJobs.filter(job =>
-        job.experience?.toLowerCase().includes(experience.toLowerCase())
-      );
+      conditions.push(eq(jobs.type, type.toLowerCase() as any));
     }
 
     if (featured === 'true') {
-      filteredJobs = filteredJobs.filter(job => job.featured);
+      conditions.push(eq(jobs.featured, true));
     }
 
     if (search) {
-      const searchLower = search.toLowerCase();
-      filteredJobs = filteredJobs.filter(job =>
-        job.title.toLowerCase().includes(searchLower) ||
-        job.description.toLowerCase().includes(searchLower) ||
-        job.department.toLowerCase().includes(searchLower)
+      const searchPattern = `%${search}%`;
+      conditions.push(
+        or(
+          ilike(jobs.title, searchPattern),
+          ilike(jobs.description, searchPattern),
+          ilike(jobs.department, searchPattern)
+        )
       );
     }
 
-    // Apply limit
+    let query = db.select().from(jobs).where(and(...conditions)).orderBy(desc(jobs.featured), desc(jobs.createdAt));
+
     if (limit) {
       const limitNum = parseInt(limit);
       if (!isNaN(limitNum) && limitNum > 0) {
-        filteredJobs = filteredJobs.slice(0, limitNum);
+        query = query.limit(limitNum) as any;
       }
     }
 
-    // Sort by date posted (most recent first) and featured jobs first
-    filteredJobs.sort((a, b) => {
-      if (a.featured && !b.featured) return -1;
-      if (!a.featured && b.featured) return 1;
-      const dateA = a.datePosted ? new Date(a.datePosted).getTime() : 0;
-      const dateB = b.datePosted ? new Date(b.datePosted).getTime() : 0;
-      return dateB - dateA;
-    });
+    const dbJobs = await query;
+    const mappedJobs = dbJobs.map(mapJob);
 
     return NextResponse.json({
       success: true,
-      jobs: filteredJobs,
-      total: filteredJobs.length,
+      jobs: mappedJobs,
+      total: mappedJobs.length,
       filters: {
         department,
         location,
         type,
-        experience,
         featured,
         search
       }
@@ -343,28 +125,25 @@ export async function POST(request: NextRequest) {
       }
     }
 
-    // Create new job
-    const newJob = {
-      id: Math.max(...jobs.map(j => j.id)) + 1,
+    // Create new job in database
+    const [newJob] = await db.insert(jobs).values({
       title: body.title,
       department: body.department,
       location: body.location,
-      type: body.type,
+      type: body.type.toLowerCase() as any,
       description: body.description,
       requirements: body.requirements || [],
-      responsibilities: body.responsibilities || [],
-      datePosted: new Date().toISOString().split('T')[0],
-      applicationDeadline: body.applicationDeadline || null,
-      salaryRange: body.salaryRange || null,
-      experience: body.experience || '',
-      featured: body.featured || false
-    };
-
-    jobs.push(newJob);
+      benefits: body.benefits || [],
+      salaryMin: body.salaryMin || null,
+      salaryMax: body.salaryMax || null,
+      salaryCurrency: body.salaryCurrency || 'USD',
+      status: 'active',
+      featured: body.featured || false,
+    }).returning();
 
     return NextResponse.json({
       success: true,
-      job: newJob,
+      job: mapJob(newJob),
       message: 'Job created successfully'
     }, { status: 201 });
 
@@ -390,7 +169,7 @@ export async function PUT(request: NextRequest) {
       );
     }
 
-    const job = jobs.find(j => j.id === parseInt(id));
+    const [job] = await db.select().from(jobs).where(eq(jobs.id, id));
 
     if (!job) {
       return NextResponse.json(
@@ -401,7 +180,7 @@ export async function PUT(request: NextRequest) {
 
     return NextResponse.json({
       success: true,
-      job
+      job: mapJob(job)
     });
 
   } catch (error) {

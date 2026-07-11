@@ -1,4 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
+import { db } from '@/lib/db/connection';
+import { contactSubmissions } from '@/lib/db/schema';
 
 export async function GET() {
   const contact = {
@@ -25,14 +27,43 @@ export async function POST(request: NextRequest) {
   try {
     const body = await request.json();
     
-    // In a real implementation, you would process the contact form submission
-    // For now, we'll just return a success response
+    const firstName = body.firstName || body.first_name;
+    const lastName = body.lastName || body.last_name;
+    const email = body.email;
+    const phone = body.phone;
+    const company = body.company;
+    const subject = body.subject;
+    const message = body.message;
+    const inquiryType = body.inquiryType || body.inquiry_type || 'general';
+
+    // Validate required fields
+    if (!firstName || !lastName || !email || !subject || !message) {
+      return NextResponse.json({
+        success: false,
+        error: "Missing required fields (first_name, last_name, email, subject, message)"
+      }, { status: 400 });
+    }
+
+    // Insert submission into database
+    await db.insert(contactSubmissions).values({
+      firstName,
+      lastName,
+      email,
+      phone: phone || null,
+      company: company || null,
+      subject,
+      message,
+      inquiryType: inquiryType.toLowerCase() as any,
+      status: 'new',
+      priority: 'normal'
+    });
     
     return NextResponse.json({ 
       success: true, 
       message: "Thank you for your message. We'll get back to you soon!" 
     });
   } catch (error) {
+    console.error('Error submitting contact form:', error);
     return NextResponse.json({ 
       success: false, 
       message: "Failed to send message. Please try again." 

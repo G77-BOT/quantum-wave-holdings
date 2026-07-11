@@ -1,12 +1,12 @@
 import { NextRequest } from 'next/server';
-import { drizzle } from 'drizzle-orm/neon-http';
-import { neon } from '@neondatabase/serverless';
+import { drizzle } from 'drizzle-orm/postgres-js';
+import postgres from 'postgres';
 import * as schema from '../lib/db/schema';
 
 // Create a connection to a test database
 const testDbUrl = process.env.TEST_DATABASE_URL || 'postgres://postgres:postgres@localhost:5432/test';
-const sql = neon(testDbUrl);
-const db = drizzle(sql, { schema });
+const client = postgres(testDbUrl, { prepare: false });
+const db = drizzle(client, { schema });
 
 // Mock Next.js request
 export const createMockRequest = (method: string, body?: any, params?: any): NextRequest => {

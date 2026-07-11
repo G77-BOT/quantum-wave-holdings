@@ -1,9 +1,11 @@
 import { GET } from '@/app/api/news/route';
 import { NextResponse } from 'next/server';
+import { createMockRequest } from '../../test-utils';
 
 describe('News API', () => {
   it('should return a list of news articles', async () => {
-    const response = await GET();
+    const req = createMockRequest('GET');
+    const response = await GET(req);
     const data = await response.json();
 
     expect(response).toBeInstanceOf(NextResponse);

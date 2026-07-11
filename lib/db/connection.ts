@@ -1,12 +1,31 @@
-import { drizzle } from 'drizzle-orm/neon-http';
-import { neon } from '@neondatabase/serverless';
+import { drizzle } from 'drizzle-orm/postgres-js';
+import postgres from 'postgres';
 import * as schema from './schema';
 
-if (!process.env.DATABASE_URL) {
-  throw new Error('DATABASE_URL environment variable is not set');
+let dbInstance: any = null;
+
+function getDb() {
+  if (!dbInstance) {
+    let dbUrl = process.env.DATABASE_URL || '';
+    // If DATABASE_URL is empty or the placeholder template, use a valid dummy URL for build-time evaluation
+    if (!dbUrl || dbUrl.includes('host:port/db')) {
+      dbUrl = 'postgresql://postgres:postgres@localhost:5432/postgres';
+    }
+    
+    if (!dbUrl) {
+      throw new Error('DATABASE_URL environment variable is not set');
+    }
+    
+    const client = postgres(dbUrl, { prepare: false });
+    dbInstance = drizzle(client, { schema });
+  }
+  return dbInstance;
 }
 
-const sql = neon(process.env.DATABASE_URL);
-export const db = drizzle(sql, { schema });
+export const db = new Proxy({} as any, {
+  get(target, prop, receiver) {
+    return Reflect.get(getDb(), prop, receiver);
+  }
+});
 
 export type Database = typeof db;
