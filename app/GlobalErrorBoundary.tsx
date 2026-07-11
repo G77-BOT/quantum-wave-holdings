@@ -1,16 +1,13 @@
 'use client';
 
-import { ErrorBoundary as ReactErrorBoundary } from 'react-error-boundary';
+import { ErrorBoundary as ReactErrorBoundary, FallbackProps } from 'react-error-boundary';
 import { AlertTriangle, RefreshCw } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 
 function ErrorFallback({ 
   error, 
   resetErrorBoundary 
-}: { 
-  error: Error; 
-  resetErrorBoundary: () => void;
-}) {
+}: FallbackProps) {
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-50 dark:bg-gray-900 p-4">
       <div className="max-w-md w-full p-6 bg-white dark:bg-gray-800 rounded-lg shadow-lg text-center">
@@ -21,7 +18,7 @@ function ErrorFallback({
           Something went wrong
         </h2>
         <p className="text-sm text-gray-600 dark:text-gray-300 mb-6">
-          {error.message || 'An unexpected error occurred'}
+          {((error as any)?.message) || 'An unexpected error occurred'}
         </p>
         <div className="flex flex-col sm:flex-row gap-3 justify-center">
           <Button
