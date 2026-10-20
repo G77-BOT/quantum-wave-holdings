@@ -61,14 +61,14 @@ export default function Header() {
           {/* Logo */}
           <div className="flex items-center">
             <Link href="/" className="flex items-center space-x-2 sm:space-x-3">
-              <div className="w-8 h-8 sm:w-10 sm:h-10 bg-gradient-to-r from-blue-600 to-indigo-600 rounded-lg flex items-center justify-center">
+              <div className="w-8 h-8 sm:w-10 sm:h-10 bg-gradient-to-r from-blue-600 to-indigo-600 rounded-lg flex items-center justify-center flex-shrink-0">
                 <span className="text-white font-bold text-xs sm:text-sm">QWH</span>
               </div>
-              <div className="hidden xs:block">
-                <h1 className="text-xl font-bold bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent">
+              <div className="hidden sm:block">
+                <h1 className="text-base sm:text-xl font-bold bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent">
                   Quantum Wave Holdings
                 </h1>
-                <p className="text-xs text-gray-500 dark:text-gray-400">Corporate Excellence</p>
+                <p className="text-xs text-gray-500 dark:text-gray-400 hidden lg:block">Corporate Excellence</p>
               </div>
             </Link>
           </div>

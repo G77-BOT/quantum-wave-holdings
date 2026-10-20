@@ -166,8 +166,8 @@ export default function AdminDashboard() {
                   <span className="text-white font-bold text-sm">QWH</span>
                 </div>
                 <div>
-                  <h1 className="text-lg font-bold text-gray-900">Admin Dashboard</h1>
-                  <p className="text-xs text-gray-500">Quantum Wave Holdings</p>
+                  <h1 className="text-lg font-bold text-gray-900 dark:text-white">Admin Dashboard</h1>
+                  <p className="text-xs text-gray-600 dark:text-gray-400">Quantum Wave Holdings</p>
                 </div>
               </Link>
             </div>
@@ -200,7 +200,7 @@ export default function AdminDashboard() {
         {/* Stats Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
           {/* Companies Stats */}
-          <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
+          <div className="bg-white dark:bg-gray-800 dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700 dark:border-gray-700 p-6">
             <div className="flex items-center">
               <div className="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center mr-4">
                 <Building className="w-6 h-6 text-blue-600" />
@@ -208,8 +208,8 @@ export default function AdminDashboard() {
               <div className="flex-1">
                 <h3 className="text-lg font-semibold text-gray-900">Portfolio Companies</h3>
                 <div className="mt-2">
-                  <div className="text-2xl font-bold text-gray-900">{stats.companies.total}</div>
-                  <div className="text-sm text-gray-500">
+                  <div className="text-2xl font-bold text-gray-900 dark:text-white">{stats.companies.total}</div>
+                  <div className="text-sm text-gray-600 dark:text-gray-400">
                     {stats.companies.active} active • {stats.companies.featured} featured
                   </div>
                 </div>
@@ -218,7 +218,7 @@ export default function AdminDashboard() {
           </div>
 
           {/* Jobs Stats */}
-          <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
+          <div className="bg-white dark:bg-gray-800 dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700 dark:border-gray-700 p-6">
             <div className="flex items-center">
               <div className="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center mr-4">
                 <Briefcase className="w-6 h-6 text-green-600" />
@@ -226,8 +226,8 @@ export default function AdminDashboard() {
               <div className="flex-1">
                 <h3 className="text-lg font-semibold text-gray-900">Job Openings</h3>
                 <div className="mt-2">
-                  <div className="text-2xl font-bold text-gray-900">{stats.jobs.total}</div>
-                  <div className="text-sm text-gray-500">
+                  <div className="text-2xl font-bold text-gray-900 dark:text-white">{stats.jobs.total}</div>
+                  <div className="text-sm text-gray-600 dark:text-gray-400">
                     {stats.jobs.applications} applications received
                   </div>
                 </div>
@@ -236,7 +236,7 @@ export default function AdminDashboard() {
           </div>
 
           {/* News Stats */}
-          <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
+          <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700 p-6">
             <div className="flex items-center">
               <div className="w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center mr-4">
                 <Newspaper className="w-6 h-6 text-purple-600" />
@@ -244,8 +244,8 @@ export default function AdminDashboard() {
               <div className="flex-1">
                 <h3 className="text-lg font-semibold text-gray-900">News Articles</h3>
                 <div className="mt-2">
-                  <div className="text-2xl font-bold text-gray-900">{stats.news.total}</div>
-                  <div className="text-sm text-gray-500">
+                  <div className="text-2xl font-bold text-gray-900 dark:text-white">{stats.news.total}</div>
+                  <div className="text-sm text-gray-600 dark:text-gray-400">
                     {stats.news.published} published • {stats.news.featured} featured
                   </div>
                 </div>
@@ -254,7 +254,7 @@ export default function AdminDashboard() {
           </div>
 
           {/* Contacts Stats */}
-          <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
+          <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700 p-6">
             <div className="flex items-center">
               <div className="w-12 h-12 bg-orange-100 rounded-lg flex items-center justify-center mr-4">
                 <MessageSquare className="w-6 h-6 text-orange-600" />
@@ -262,8 +262,8 @@ export default function AdminDashboard() {
               <div className="flex-1">
                 <h3 className="text-lg font-semibold text-gray-900">Contact Messages</h3>
                 <div className="mt-2">
-                  <div className="text-2xl font-bold text-gray-900">{stats.contacts.total}</div>
-                  <div className="text-sm text-gray-500">
+                  <div className="text-2xl font-bold text-gray-900 dark:text-white">{stats.contacts.total}</div>
+                  <div className="text-sm text-gray-600 dark:text-gray-400">
                     {stats.contacts.unresolved} unresolved
                   </div>
                 </div>
@@ -272,7 +272,7 @@ export default function AdminDashboard() {
           </div>
 
           {/* Team Stats */}
-          <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
+          <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700 p-6">
             <div className="flex items-center">
               <div className="w-12 h-12 bg-indigo-100 rounded-lg flex items-center justify-center mr-4">
                 <Users className="w-6 h-6 text-indigo-600" />
@@ -280,8 +280,8 @@ export default function AdminDashboard() {
               <div className="flex-1">
                 <h3 className="text-lg font-semibold text-gray-900">Team Members</h3>
                 <div className="mt-2">
-                  <div className="text-2xl font-bold text-gray-900">{stats.team.total}</div>
-                  <div className="text-sm text-gray-500">
+                  <div className="text-2xl font-bold text-gray-900 dark:text-white">{stats.team.total}</div>
+                  <div className="text-sm text-gray-600 dark:text-gray-400">
                     {stats.team.leadership} leadership
                   </div>
                 </div>
@@ -290,7 +290,7 @@ export default function AdminDashboard() {
           </div>
 
           {/* Subscribers Stats */}
-          <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
+          <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700 p-6">
             <div className="flex items-center">
               <div className="w-12 h-12 bg-pink-100 rounded-lg flex items-center justify-center mr-4">
                 <Mail className="w-6 h-6 text-pink-600" />
@@ -298,8 +298,8 @@ export default function AdminDashboard() {
               <div className="flex-1">
                 <h3 className="text-lg font-semibold text-gray-900">Newsletter</h3>
                 <div className="mt-2">
-                  <div className="text-2xl font-bold text-gray-900">{stats.subscribers.total}</div>
-                  <div className="text-sm text-gray-500">
+                  <div className="text-2xl font-bold text-gray-900 dark:text-white">{stats.subscribers.total}</div>
+                  <div className="text-sm text-gray-600 dark:text-gray-400">
                     +{stats.subscribers.thisMonth} this month
                   </div>
                 </div>
@@ -310,7 +310,7 @@ export default function AdminDashboard() {
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
           {/* Quick Actions */}
-          <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
+          <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700 p-6">
             <h3 className="text-lg font-semibold text-gray-900 mb-4">Quick Actions</h3>
             <div className="grid grid-cols-2 gap-4">
               {quickActions.map((action, index) => (
@@ -322,15 +322,15 @@ export default function AdminDashboard() {
                   <div className={`w-10 h-10 bg-gradient-to-r ${action.color} rounded-lg flex items-center justify-center mb-3 group-hover:scale-110 transition-transform`}>
                     <action.icon className="w-5 h-5 text-white" />
                   </div>
-                  <h4 className="font-medium text-gray-900 mb-1">{action.title}</h4>
-                  <p className="text-sm text-gray-500">{action.description}</p>
+                  <h4 className="font-medium text-gray-900 dark:text-white mb-1">{action.title}</h4>
+                  <p className="text-sm text-gray-600 dark:text-gray-400">{action.description}</p>
                 </Link>
               ))}
             </div>
           </div>
 
           {/* Recent Activity */}
-          <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
+          <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700 p-6">
             <h3 className="text-lg font-semibold text-gray-900 mb-4">Recent Activity</h3>
             <div className="space-y-4">
               {recentActivity.map((activity, index) => (
@@ -343,9 +343,9 @@ export default function AdminDashboard() {
                     )}
                   </div>
                   <div className="flex-1 min-w-0">
-                    <p className="text-sm font-medium text-gray-900">{activity.title}</p>
-                    <p className="text-sm text-gray-500">{activity.description}</p>
-                    <p className="text-xs text-gray-400 mt-1">{activity.time}</p>
+                    <p className="text-sm font-medium text-gray-900 dark:text-white">{activity.title}</p>
+                    <p className="text-sm text-gray-600 dark:text-gray-400">{activity.description}</p>
+                    <p className="text-xs text-gray-500 dark:text-gray-500 mt-1">{activity.time}</p>
                   </div>
                 </div>
               ))}

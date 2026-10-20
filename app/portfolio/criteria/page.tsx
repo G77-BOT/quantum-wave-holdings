@@ -1,5 +1,10 @@
+'use client';
+
 import Link from 'next/link';
+import { motion } from 'framer-motion';
 import { ArrowLeft, TrendingUp, Users, Target, Shield, Globe, CheckCircle, DollarSign } from 'lucide-react';
+import PageTransition from '@/components/ui/PageTransition';
+import GlassCard from '@/components/ui/GlassCard';
 
 export default function InvestmentCriteriaPage() {
   const criteriaCategories = [
@@ -120,16 +125,21 @@ export default function InvestmentCriteriaPage() {
   ];
 
   return (
-    <>      <div className="min-h-screen bg-gradient-to-br from-slate-50 to-blue-50 dark:from-gray-900 dark:to-gray-800">
+    <PageTransition>
+      <div className="min-h-screen bg-gradient-to-br from-slate-50 to-blue-50 dark:from-gray-900 dark:to-gray-800 aurora-bg">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
           {/* Back Button */}
-          <Link href="/portfolio" className="inline-flex items-center text-gray-600 hover:text-blue-600 transition-colors mb-8">
+          <Link href="/portfolio" className="inline-flex items-center text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors mb-8">
             <ArrowLeft className="w-5 h-5 mr-2" />
             Back to Portfolio
           </Link>
 
           {/* Hero Section */}
-          <section className="bg-gradient-to-r from-blue-600 to-indigo-600 text-white rounded-2xl overflow-hidden mb-12">
+          <motion.section 
+            className="bg-gradient-to-r from-blue-600 to-indigo-600 text-white rounded-2xl overflow-hidden mb-12 aurora-bg"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+          >
             <div className="px-8 py-16 md:px-12">
               <div className="text-center">
                 <h1 className="text-4xl md:text-5xl font-bold mb-6">Investment Criteria</h1>
@@ -139,13 +149,13 @@ export default function InvestmentCriteriaPage() {
                 </p>
               </div>
             </div>
-          </section>
+          </motion.section>
 
           {/* Investment Criteria */}
           <section className="mb-16">
             <div className="text-center mb-12">
-              <h2 className="text-3xl font-bold text-gray-900 mb-4">What We Look For</h2>
-              <p className="text-lg text-gray-600 max-w-3xl mx-auto">
+              <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-4">What We Look For</h2>
+              <p className="text-lg text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
                 Our investment decisions are guided by rigorous criteria that help us identify companies 
                 with the highest potential for sustainable growth and market impact.
               </p>
@@ -153,75 +163,97 @@ export default function InvestmentCriteriaPage() {
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
               {criteriaCategories.map((category, index) => (
-                <div key={index} className="bg-white rounded-2xl shadow-xl border border-gray-100 overflow-hidden">
-                  <div className={`bg-gradient-to-r ${category.color} p-6`}>
-                    <div className="flex items-center space-x-4">
-                      <div className="w-12 h-12 bg-white/20 rounded-xl flex items-center justify-center">
-                        <category.icon className="w-6 h-6 text-white" />
+                <motion.div
+                  key={index}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: index * 0.1 }}
+                >
+                  <GlassCard className="overflow-hidden">
+                    <div className={`bg-gradient-to-r ${category.color} p-6`}>
+                      <div className="flex items-center space-x-4">
+                        <div className="w-12 h-12 bg-white/20 rounded-xl flex items-center justify-center">
+                          <category.icon className="w-6 h-6 text-white" />
+                        </div>
+                        <h3 className="text-xl font-bold text-white">{category.title}</h3>
                       </div>
-                      <h3 className="text-xl font-bold text-white">{category.title}</h3>
                     </div>
-                  </div>
-                  <div className="p-6">
-                    <ul className="space-y-3">
-                      {category.criteria.map((criterion, criterionIndex) => (
-                        <li key={criterionIndex} className="flex items-start">
-                          <CheckCircle className="w-5 h-5 text-green-600 mr-3 mt-0.5 flex-shrink-0" />
-                          <span className="text-gray-700">{criterion}</span>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                </div>
+                    <div className="p-6">
+                      <ul className="space-y-3">
+                        {category.criteria.map((criterion, criterionIndex) => (
+                          <li key={criterionIndex} className="flex items-start">
+                            <CheckCircle className="w-5 h-5 text-green-600 dark:text-green-400 mr-3 mt-0.5 flex-shrink-0" />
+                            <span className="text-gray-700 dark:text-gray-300">{criterion}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  </GlassCard>
+                </motion.div>
               ))}
             </div>
           </section>
 
           {/* Industry Focus */}
           <section className="mb-16">
-            <div className="bg-white rounded-2xl shadow-xl border border-gray-100 p-8">
+            <GlassCard className="p-8">
               <div className="text-center mb-12">
-                <h2 className="text-3xl font-bold text-gray-900 mb-4">Industry Focus Areas</h2>
-                <p className="text-lg text-gray-600 max-w-3xl mx-auto">
+                <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-4">Industry Focus Areas</h2>
+                <p className="text-lg text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
                   We focus on high-growth sectors where technology and innovation create significant competitive advantages.
                 </p>
               </div>
 
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                 {industriesFocus.map((industry, index) => (
-                  <div key={index} className="border border-gray-200 rounded-xl p-6 hover:border-blue-300 hover:shadow-lg transition-all">
-                    <h3 className="text-lg font-semibold text-gray-900 mb-3">{industry.name}</h3>
-                    <p className="text-gray-600 mb-4 text-sm">{industry.description}</p>
+                  <motion.div
+                    key={index}
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: index * 0.1 }}
+                    className="border border-gray-200 dark:border-gray-700 rounded-xl p-6 hover:border-blue-300 dark:hover:border-blue-600 hover:shadow-lg transition-all"
+                  >
+                    <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-3">{industry.name}</h3>
+                    <p className="text-gray-600 dark:text-gray-300 mb-4 text-sm">{industry.description}</p>
                     <div>
-                      <h4 className="text-sm font-medium text-gray-900 mb-2">Examples:</h4>
+                      <h4 className="text-sm font-medium text-gray-900 dark:text-white mb-2">Examples:</h4>
                       <ul className="space-y-1">
                         {industry.examples.map((example, exampleIndex) => (
-                          <li key={exampleIndex} className="text-sm text-blue-600">
+                          <li key={exampleIndex} className="text-sm text-blue-600 dark:text-blue-400">
                             • {example}
                           </li>
                         ))}
                       </ul>
                     </div>
-                  </div>
+                  </motion.div>
                 ))}
               </div>
-            </div>
+            </GlassCard>
           </section>
 
           {/* Investment Process */}
           <section className="mb-16">
             <div className="text-center mb-12">
-              <h2 className="text-3xl font-bold text-gray-900 mb-4">Our Investment Process</h2>
-              <p className="text-lg text-gray-600 max-w-3xl mx-auto">
+              <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-4">Our Investment Process</h2>
+              <p className="text-lg text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
                 A structured approach that ensures thorough evaluation while maintaining efficiency 
                 for exceptional opportunities.
               </p>
             </div>
 
-            <div className="bg-white rounded-2xl shadow-xl border border-gray-100 p-8">
+            <GlassCard className="p-8">
               <div className="space-y-8">
                 {investmentProcess.map((phase, index) => (
-                  <div key={index} className="flex items-start space-x-6">
+                  <motion.div
+                    key={index}
+                    initial={{ opacity: 0, x: -20 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: index * 0.1 }}
+                    className="flex items-start space-x-6"
+                  >
                     <div className="flex-shrink-0">
                       <div className="w-12 h-12 bg-blue-600 text-white rounded-full flex items-center justify-center font-bold">
                         {phase.step}
@@ -229,22 +261,27 @@ export default function InvestmentCriteriaPage() {
                     </div>
                     <div className="flex-grow">
                       <div className="flex items-center justify-between mb-2">
-                        <h3 className="text-xl font-semibold text-gray-900">{phase.title}</h3>
-                        <span className="text-sm text-gray-500 bg-gray-100 px-3 py-1 rounded-full">
+                        <h3 className="text-xl font-semibold text-gray-900 dark:text-white">{phase.title}</h3>
+                        <span className="text-sm text-gray-500 dark:text-gray-400 bg-gray-100 dark:bg-gray-700 px-3 py-1 rounded-full">
                           {phase.duration}
                         </span>
                       </div>
-                      <p className="text-gray-600">{phase.description}</p>
+                      <p className="text-gray-600 dark:text-gray-300">{phase.description}</p>
                     </div>
-                  </div>
+                  </motion.div>
                 ))}
               </div>
-            </div>
+            </GlassCard>
           </section>
 
           {/* Investment Range */}
-          <section className="mb-16">
-            <div className="bg-gradient-to-r from-green-600 to-emerald-600 text-white rounded-2xl p-8">
+          <motion.section 
+            className="mb-16"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+          >
+            <div className="bg-gradient-to-r from-green-600 to-emerald-600 text-white rounded-2xl p-8 aurora-bg">
               <div className="text-center">
                 <h2 className="text-3xl font-bold mb-6">Investment Range</h2>
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-4xl mx-auto">
@@ -263,13 +300,18 @@ export default function InvestmentCriteriaPage() {
                 </div>
               </div>
             </div>
-          </section>
+          </motion.section>
 
           {/* Call to Action */}
-          <section className="text-center">
-            <div className="bg-white rounded-2xl p-8 shadow-xl border border-gray-100">
-              <h2 className="text-3xl font-bold text-gray-900 mb-4">Ready to Partner With Us?</h2>
-              <p className="text-lg text-gray-600 mb-8 max-w-2xl mx-auto">
+          <motion.section 
+            className="text-center"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+          >
+            <GlassCard className="p-8">
+              <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-4">Ready to Partner With Us?</h2>
+              <p className="text-lg text-gray-600 dark:text-gray-300 mb-8 max-w-2xl mx-auto">
                 If your company meets our investment criteria and you're looking for a strategic partner 
                 to accelerate your growth, we'd love to hear from you.
               </p>
@@ -282,14 +324,15 @@ export default function InvestmentCriteriaPage() {
                 </Link>
                 <Link
                   href="/contact"
-                  className="inline-flex items-center px-8 py-4 border-2 border-gray-300 text-gray-700 font-medium rounded-xl hover:bg-gray-50 transition-colors"
+                  className="inline-flex items-center px-8 py-4 border-2 border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 font-medium rounded-xl hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors"
                 >
                   General Inquiry
                 </Link>
               </div>
-            </div>
-          </section>
+            </GlassCard>
+          </motion.section>
         </div>
-      </div>    </>
+      </div>
+    </PageTransition>
   );
 }

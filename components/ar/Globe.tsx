@@ -135,9 +135,9 @@ function GlobeScene({
           side={THREE.DoubleSide}
         />
         
-        {/* Globe texture */}
+        {/* Globe texture - with fallback */}
         <meshStandardMaterial
-          map={new THREE.TextureLoader().load('/images/earth-texture.jpg')}
+          color="#1e3a8a"
           metalness={0.1}
           roughness={0.7}
           transparent
@@ -146,13 +146,13 @@ function GlobeScene({
         />
       </mesh>
       
-      {/* Cloud layer */}
+      {/* Cloud layer - with fallback */}
       <mesh>
         <sphereGeometry args={[1.01, 64, 64]} />
         <meshStandardMaterial
-          map={new THREE.TextureLoader().load('/images/clouds.png')}
+          color="#4a90a4"
           transparent
-          opacity={0.4}
+          opacity={0.3}
           side={THREE.DoubleSide}
           depthWrite={false}
         />
@@ -240,7 +240,7 @@ export default function Globe({
   }
 
   return (
-    <div className={`relative w-full h-full rounded-xl overflow-hidden ${className}`} style={style}>
+    <div className={`relative w-full h-full rounded-xl overflow-hidden ${className}`} style={style} role="img" aria-label="Interactive 3D globe showing portfolio company locations">
       <Canvas>
         <GlobeScene locations={locations} {...props} />
       </Canvas>

@@ -1,5 +1,10 @@
+'use client';
+
 import Link from 'next/link';
+import { motion } from 'framer-motion';
 import { ArrowLeft, TrendingUp, Award, Users, Globe, ExternalLink, Calendar, DollarSign } from 'lucide-react';
+import PageTransition from '@/components/ui/PageTransition';
+import GlassCard from '@/components/ui/GlassCard';
 
 export default function SuccessStoriesPage() {
   const successStories = [
@@ -165,16 +170,21 @@ export default function SuccessStoriesPage() {
   ];
 
   return (
-    <>      <div className="min-h-screen bg-gradient-to-br from-slate-50 to-blue-50 dark:from-gray-900 dark:to-gray-800">
+    <PageTransition>
+      <div className="min-h-screen bg-gradient-to-br from-slate-50 to-blue-50 dark:from-gray-900 dark:to-gray-800 aurora-bg">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
           {/* Back Button */}
-          <Link href="/portfolio" className="inline-flex items-center text-gray-600 hover:text-blue-600 transition-colors mb-8">
+          <Link href="/portfolio" className="inline-flex items-center text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors mb-8">
             <ArrowLeft className="w-5 h-5 mr-2" />
             Back to Portfolio
           </Link>
 
           {/* Hero Section */}
-          <section className="bg-gradient-to-r from-green-600 to-emerald-600 text-white rounded-2xl overflow-hidden mb-12">
+          <motion.section 
+            className="bg-gradient-to-r from-green-600 to-emerald-600 text-white rounded-2xl overflow-hidden mb-12 aurora-bg"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+          >
             <div className="px-8 py-16 md:px-12">
               <div className="text-center">
                 <Award className="w-16 h-16 mx-auto mb-6 text-green-100" />
@@ -185,47 +195,61 @@ export default function SuccessStoriesPage() {
                 </p>
               </div>
             </div>
-          </section>
+          </motion.section>
 
           {/* Key Metrics */}
           <section className="mb-16">
-            <div className="bg-white rounded-2xl shadow-xl border border-gray-100 p-8">
-              <h2 className="text-3xl font-bold text-gray-900 mb-8 text-center">Portfolio Performance</h2>
+            <GlassCard className="p-8">
+              <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-8 text-center">Portfolio Performance</h2>
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
                 {keyMetrics.map((metric, index) => (
-                  <div key={index} className="text-center">
-                    <div className="text-3xl font-bold text-blue-600 mb-2">{metric.value}</div>
-                    <div className="text-lg font-semibold text-gray-900 mb-1">{metric.metric}</div>
-                    <div className="text-sm text-gray-600">{metric.description}</div>
-                  </div>
+                  <motion.div
+                    key={index}
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: index * 0.1 }}
+                    className="text-center"
+                  >
+                    <div className="text-3xl font-bold text-blue-600 dark:text-blue-400 mb-2">{metric.value}</div>
+                    <div className="text-lg font-semibold text-gray-900 dark:text-white mb-1">{metric.metric}</div>
+                    <div className="text-sm text-gray-600 dark:text-gray-300">{metric.description}</div>
+                  </motion.div>
                 ))}
               </div>
-            </div>
+            </GlassCard>
           </section>
 
           {/* Exit Types Distribution */}
           <section className="mb-16">
-            <div className="bg-white rounded-2xl shadow-xl border border-gray-100 p-8">
-              <h2 className="text-3xl font-bold text-gray-900 mb-8 text-center">Exit Distribution</h2>
+            <GlassCard className="p-8">
+              <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-8 text-center">Exit Distribution</h2>
               <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                 {exitTypes.map((exit, index) => (
-                  <div key={index} className="text-center">
+                  <motion.div
+                    key={index}
+                    initial={{ opacity: 0, scale: 0.9 }}
+                    whileInView={{ opacity: 1, scale: 1 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: index * 0.1 }}
+                    className="text-center"
+                  >
                     <div className={`w-24 h-24 mx-auto mb-4 bg-gradient-to-r ${exit.color} rounded-full flex items-center justify-center`}>
                       <span className="text-2xl font-bold text-white">{exit.count}</span>
                     </div>
-                    <h3 className="text-lg font-semibold text-gray-900 mb-2">{exit.type}</h3>
-                    <p className="text-gray-600 text-sm">{exit.percentage}% of exits</p>
-                  </div>
+                    <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-2">{exit.type}</h3>
+                    <p className="text-gray-600 dark:text-gray-300 text-sm">{exit.percentage}% of exits</p>
+                  </motion.div>
                 ))}
               </div>
-            </div>
+            </GlassCard>
           </section>
 
           {/* Success Stories */}
           <section className="mb-16">
             <div className="text-center mb-12">
-              <h2 className="text-3xl font-bold text-gray-900 mb-4">Featured Success Stories</h2>
-              <p className="text-lg text-gray-600 max-w-3xl mx-auto">
+              <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-4">Featured Success Stories</h2>
+              <p className="text-lg text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
                 Discover how our strategic investments and partnerships have helped exceptional companies 
                 achieve remarkable growth and successful exits.
               </p>
@@ -233,110 +257,122 @@ export default function SuccessStoriesPage() {
 
             <div className="space-y-8">
               {successStories.map((story, index) => (
-                <div 
-                  key={story.id} 
-                  className={`bg-white rounded-2xl shadow-xl border border-gray-100 overflow-hidden ${story.featured ? 'ring-2 ring-green-200' : ''}`}
+                <motion.div
+                  key={story.id}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: index * 0.1 }}
                 >
-                  {story.featured && (
-                    <div className="bg-gradient-to-r from-green-600 to-emerald-600 text-white px-4 py-2 text-sm font-medium text-center">
-                      Featured Success Story
-                    </div>
-                  )}
-                  
-                  <div className="p-8">
-                    <div className="flex flex-col lg:flex-row lg:items-start lg:space-x-8">
-                      {/* Company Info */}
-                      <div className="lg:w-1/3 mb-6 lg:mb-0">
-                        <div className="flex items-center space-x-4 mb-4">
-                          <div className="w-16 h-16 bg-gradient-to-r from-blue-600 to-indigo-600 rounded-xl flex items-center justify-center">
-                            <span className="text-white font-bold text-xl">{story.company.charAt(0)}</span>
-                          </div>
-                          <div>
-                            <h3 className="text-2xl font-bold text-gray-900">{story.company}</h3>
-                            <p className="text-blue-600 font-medium">{story.industry}</p>
-                          </div>
-                        </div>
-
-                        {/* Financial Metrics */}
-                        <div className="grid grid-cols-2 gap-4 mb-4">
-                          <div className="bg-gray-50 p-4 rounded-xl">
-                            <div className="text-2xl font-bold text-green-600">{story.returns}</div>
-                            <div className="text-sm text-gray-600">Return Multiple</div>
-                          </div>
-                          <div className="bg-gray-50 p-4 rounded-xl">
-                            <div className="text-2xl font-bold text-blue-600">{story.irr}</div>
-                            <div className="text-sm text-gray-600">IRR</div>
-                          </div>
-                        </div>
-
-                        {/* Investment Details */}
-                        <div className="space-y-2 text-sm text-gray-600">
-                          <div className="flex justify-between">
-                            <span>Investment:</span>
-                            <span className="font-medium">{story.initialInvestment}</span>
-                          </div>
-                          <div className="flex justify-between">
-                            <span>Exit Value:</span>
-                            <span className="font-medium text-green-600">{story.exitValue}</span>
-                          </div>
-                          <div className="flex justify-between">
-                            <span>Exit Type:</span>
-                            <span className="font-medium">{story.exitType}</span>
-                          </div>
-                          <div className="flex justify-between">
-                            <span>Timeline:</span>
-                            <span className="font-medium">{story.investmentDate} - {story.exitDate}</span>
-                          </div>
-                        </div>
+                  <GlassCard 
+                    className={`overflow-hidden ${story.featured ? 'ring-2 ring-green-200 dark:ring-green-800' : ''}`}
+                  >
+                    {story.featured && (
+                      <div className="bg-gradient-to-r from-green-600 to-emerald-600 text-white px-4 py-2 text-sm font-medium text-center">
+                        Featured Success Story
                       </div>
-
-                      {/* Story Details */}
-                      <div className="lg:w-2/3">
-                        <p className="text-gray-700 mb-6 leading-relaxed">{story.description}</p>
-
-                        <div className="mb-6">
-                          <h4 className="text-lg font-semibold text-gray-900 mb-3">Key Highlights</h4>
-                          <ul className="grid grid-cols-1 md:grid-cols-2 gap-3">
-                            {story.highlights.map((highlight, idx) => (
-                              <li key={idx} className="flex items-start">
-                                <TrendingUp className="w-5 h-5 text-green-600 mr-2 mt-0.5 flex-shrink-0" />
-                                <span className="text-gray-700 text-sm">{highlight}</span>
-                              </li>
-                            ))}
-                          </ul>
-                        </div>
-
-                        <div className="bg-gradient-to-r from-blue-50 to-indigo-50 p-6 rounded-xl">
-                          <h4 className="text-lg font-semibold text-gray-900 mb-2 flex items-center">
-                            <Globe className="w-5 h-5 mr-2" />
-                            Impact
-                          </h4>
-                          <p className="text-gray-700">{story.impact}</p>
-                        </div>
-
-                        {story.acquirer && (
-                          <div className="mt-6 flex items-center justify-between">
+                    )}
+                    
+                    <div className="p-8">
+                      <div className="flex flex-col lg:flex-row lg:items-start lg:space-x-8">
+                        {/* Company Info */}
+                        <div className="lg:w-1/3 mb-6 lg:mb-0">
+                          <div className="flex items-center space-x-4 mb-4">
+                            <div className="w-16 h-16 bg-gradient-to-r from-blue-600 to-indigo-600 rounded-xl flex items-center justify-center">
+                              <span className="text-white font-bold text-xl">{story.company.charAt(0)}</span>
+                            </div>
                             <div>
-                              <span className="text-sm text-gray-600">Acquired by</span>
-                              <p className="font-semibold text-gray-900">{story.acquirer}</p>
-                            </div>
-                            <div className="flex items-center text-blue-600">
-                              <Calendar className="w-4 h-4 mr-1" />
-                              <span className="text-sm">{story.exitDate}</span>
+                              <h3 className="text-2xl font-bold text-gray-900 dark:text-white">{story.company}</h3>
+                              <p className="text-blue-600 dark:text-blue-400 font-medium">{story.industry}</p>
                             </div>
                           </div>
-                        )}
+
+                          {/* Financial Metrics */}
+                          <div className="grid grid-cols-2 gap-4 mb-4">
+                            <div className="bg-gray-50 dark:bg-gray-800/50 p-4 rounded-xl">
+                              <div className="text-2xl font-bold text-green-600 dark:text-green-400">{story.returns}</div>
+                              <div className="text-sm text-gray-600 dark:text-gray-300">Return Multiple</div>
+                            </div>
+                            <div className="bg-gray-50 dark:bg-gray-800/50 p-4 rounded-xl">
+                              <div className="text-2xl font-bold text-blue-600 dark:text-blue-400">{story.irr}</div>
+                              <div className="text-sm text-gray-600 dark:text-gray-300">IRR</div>
+                            </div>
+                          </div>
+
+                          {/* Investment Details */}
+                          <div className="space-y-2 text-sm text-gray-600 dark:text-gray-300">
+                            <div className="flex justify-between">
+                              <span>Investment:</span>
+                              <span className="font-medium">{story.initialInvestment}</span>
+                            </div>
+                            <div className="flex justify-between">
+                              <span>Exit Value:</span>
+                              <span className="font-medium text-green-600 dark:text-green-400">{story.exitValue}</span>
+                            </div>
+                            <div className="flex justify-between">
+                              <span>Exit Type:</span>
+                              <span className="font-medium">{story.exitType}</span>
+                            </div>
+                            <div className="flex justify-between">
+                              <span>Timeline:</span>
+                              <span className="font-medium">{story.investmentDate} - {story.exitDate}</span>
+                            </div>
+                          </div>
+                        </div>
+
+                        {/* Story Details */}
+                        <div className="lg:w-2/3">
+                          <p className="text-gray-700 dark:text-gray-300 mb-6 leading-relaxed">{story.description}</p>
+
+                          <div className="mb-6">
+                            <h4 className="text-lg font-semibold text-gray-900 dark:text-white mb-3">Key Highlights</h4>
+                            <ul className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                              {story.highlights.map((highlight, idx) => (
+                                <li key={idx} className="flex items-start">
+                                  <TrendingUp className="w-5 h-5 text-green-600 dark:text-green-400 mr-2 mt-0.5 flex-shrink-0" />
+                                  <span className="text-gray-700 dark:text-gray-300 text-sm">{highlight}</span>
+                                </li>
+                              ))}
+                            </ul>
+                          </div>
+
+                          <div className="bg-gradient-to-r from-blue-50 to-indigo-50 dark:from-blue-900/20 dark:to-indigo-900/20 p-6 rounded-xl">
+                            <h4 className="text-lg font-semibold text-gray-900 dark:text-white mb-2 flex items-center">
+                              <Globe className="w-5 h-5 mr-2" />
+                              Impact
+                            </h4>
+                            <p className="text-gray-700 dark:text-gray-300">{story.impact}</p>
+                          </div>
+
+                          {story.acquirer && (
+                            <div className="mt-6 flex items-center justify-between">
+                              <div>
+                                <span className="text-sm text-gray-600 dark:text-gray-400">Acquired by</span>
+                                <p className="font-semibold text-gray-900 dark:text-white">{story.acquirer}</p>
+                              </div>
+                              <div className="flex items-center text-blue-600 dark:text-blue-400">
+                                <Calendar className="w-4 h-4 mr-1" />
+                                <span className="text-sm">{story.exitDate}</span>
+                              </div>
+                            </div>
+                          )}
+                        </div>
                       </div>
                     </div>
-                  </div>
-                </div>
+                  </GlassCard>
+                </motion.div>
               ))}
             </div>
           </section>
 
           {/* Investment Philosophy */}
-          <section className="mb-16">
-            <div className="bg-gradient-to-r from-gray-900 to-blue-900 text-white rounded-2xl p-8">
+          <motion.section 
+            className="mb-16"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+          >
+            <div className="bg-gradient-to-r from-gray-900 to-blue-900 text-white rounded-2xl p-8 aurora-bg">
               <div className="text-center">
                 <h2 className="text-3xl font-bold mb-6">Our Success Formula</h2>
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-4xl mx-auto">
@@ -358,13 +394,18 @@ export default function SuccessStoriesPage() {
                 </div>
               </div>
             </div>
-          </section>
+          </motion.section>
 
           {/* Call to Action */}
-          <section className="text-center">
-            <div className="bg-white rounded-2xl p-8 shadow-xl border border-gray-100">
-              <h2 className="text-3xl font-bold text-gray-900 mb-4">Ready to Write Your Success Story?</h2>
-              <p className="text-lg text-gray-600 mb-8 max-w-2xl mx-auto">
+          <motion.section 
+            className="text-center"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+          >
+            <GlassCard className="p-8">
+              <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-4">Ready to Write Your Success Story?</h2>
+              <p className="text-lg text-gray-600 dark:text-gray-300 mb-8 max-w-2xl mx-auto">
                 Join our portfolio of successful companies and let us help you achieve exceptional growth and create lasting value.
               </p>
               <div className="flex flex-col sm:flex-row justify-center gap-4">
@@ -376,14 +417,15 @@ export default function SuccessStoriesPage() {
                 </Link>
                 <Link
                   href="/portfolio"
-                  className="inline-flex items-center px-8 py-4 border-2 border-gray-300 text-gray-700 font-medium rounded-xl hover:bg-gray-50 transition-colors"
+                  className="inline-flex items-center px-8 py-4 border-2 border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 font-medium rounded-xl hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors"
                 >
                   View Portfolio
                 </Link>
               </div>
-            </div>
-          </section>
+            </GlassCard>
+          </motion.section>
         </div>
-      </div>    </>
+      </div>
+    </PageTransition>
   );
 }

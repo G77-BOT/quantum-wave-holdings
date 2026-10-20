@@ -207,7 +207,7 @@ export default function DataVisualization({
   
   if (!mounted) {
     return (
-      <div className={`bg-gray-900 rounded-xl p-4 ${className}`} style={style}>
+      <div className={`bg-gray-900 rounded-xl p-4 ${className}`} style={style} role="img" aria-label={`Loading ${title || 'data visualization'}`}>
         {title && <h3 className="text-white text-lg mb-4">{title}</h3>}
         <div className="h-64 bg-gray-800 rounded flex items-center justify-center">
           <p className="text-gray-500">Loading visualization...</p>
@@ -217,7 +217,12 @@ export default function DataVisualization({
   }
 
   return (
-    <div className={`relative w-full h-full rounded-xl overflow-hidden ${className}`} style={style}>
+    <div 
+      className={`relative w-full h-full rounded-xl overflow-hidden ${className}`} 
+      style={style} 
+      role="img" 
+      aria-label={`${title || 'Interactive 3D data visualization'}: ${data.map(d => `${d.label}: ${d.value.toLocaleString()}`).join(', ')}`}
+    >
       {title && (
         <div className="absolute top-4 left-4 z-10 text-white text-lg font-medium">
           {title}

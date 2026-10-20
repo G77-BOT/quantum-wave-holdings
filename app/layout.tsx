@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from 'next';
-import { Inter } from 'next/font/google';
+import { Inter, Space_Grotesk } from 'next/font/google';
 import './globals.css';
 import { ThemeProvider } from '@/components/providers/ThemeProvider';
 import { ARViewProvider } from '@/components/ar/ARViewManager';
@@ -9,11 +9,26 @@ import GlobalErrorBoundary from './GlobalErrorBoundary';
 import GoogleAnalytics from '@/components/analytics/GoogleAnalytics';
 import { SpeedInsights } from "@vercel/speed-insights/next"
 
-const inter = Inter({ subsets: ['latin'] });
+const inter = Inter({ 
+  subsets: ['latin'],
+  variable: '--font-inter'
+});
+
+const spaceGrotesk = Space_Grotesk({
+  subsets: ['latin'],
+  variable: '--font-space-grotesk',
+  weight: ['300', '400', '500', '600', '700']
+});
 
 export const metadata: Metadata = {
   title: 'Quantum Wave Holdings',
   description: 'Transforming ideas into reality',
+};
+
+export const viewport: Viewport = {
+  width: 'device-width',
+  initialScale: 1,
+  maximumScale: 5,
 };
 
 export default function RootLayout({
@@ -22,8 +37,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" suppressHydrationWarning>
-      <body className={`${inter.className} min-h-screen flex flex-col bg-background text-foreground transition-colors duration-300`}>
+    <html lang="en" suppressHydrationWarning className={`${inter.variable} ${spaceGrotesk.variable}`}>
+      <body className={`${inter.className} min-h-screen flex flex-col bg-background text-foreground transition-colors duration-300 font-sans antialiased`}>
         <ThemeProvider>
           <ARViewProvider>
             <GlobalErrorBoundary>
@@ -36,6 +51,7 @@ export default function RootLayout({
             </GlobalErrorBoundary>
           </ARViewProvider>
         </ThemeProvider>
+        <SpeedInsights />
       </body>
     </html>
   );

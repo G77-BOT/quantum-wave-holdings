@@ -130,7 +130,7 @@ export default function AdminNewsPage() {
                 <h1 className="text-xl font-bold bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent">
                   News Admin
                 </h1>
-                <p className="text-xs text-gray-500">Content Management</p>
+                <p className="text-xs text-gray-600 dark:text-gray-400">Content Management</p>
               </div>
             </Link>
             <nav className="flex space-x-4">
@@ -165,7 +165,7 @@ export default function AdminNewsPage() {
 
         {/* Create/Edit Form */}
         {isCreating && (
-          <div className="bg-white rounded-xl shadow-lg p-6 mb-8">
+          <div className="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6 mb-8">
             <div className="flex items-center justify-between mb-6">
               <h2 className="text-2xl font-bold text-gray-900">
                 {editingId ? 'Edit Article' : 'Create New Article'}
@@ -274,7 +274,7 @@ export default function AdminNewsPage() {
         )}
 
         {/* Articles List */}
-        <div className="bg-white rounded-xl shadow-lg">
+        <div className="bg-white dark:bg-gray-800 rounded-xl shadow-lg">
           <div className="p-6 border-b border-gray-100">
             <h2 className="text-xl font-bold text-gray-900">Published Articles</h2>
             <p className="text-gray-600">Total: {articles.length} articles</p>
@@ -300,10 +300,10 @@ export default function AdminNewsPage() {
               {articles.map((article) => (
                 <div key={article.id} className="p-6 flex items-center justify-between">
                   <div className="flex-1">
-                    <h3 className="text-lg font-medium text-gray-900 mb-1">
+                    <h3 className="text-lg font-medium text-gray-900 dark:text-white mb-1">
                       {article.title}
                     </h3>
-                    <div className="flex items-center text-sm text-gray-500 space-x-4">
+                    <div className="flex items-center text-sm text-gray-600 dark:text-gray-400 space-x-4">
                       <span className="inline-flex items-center px-2 py-1 rounded-full text-xs bg-blue-100 text-blue-700">
                         {article.category}
                       </span>

@@ -1,10 +1,15 @@
 'use client';
-export const dynamic = 'force-dynamic';
-
 
 import Link from 'next/link';
 import { useState } from 'react';
+import { motion } from 'framer-motion';
 import { ArrowLeft, TrendingUp, DollarSign, Building, Calendar, Download, ExternalLink, BarChart3, Users, Target } from 'lucide-react';
+import PageTransition from '@/components/ui/PageTransition';
+import GlassCard from '@/components/ui/GlassCard';
+import dynamic from 'next/dynamic';
+
+// Dynamically import DataVisualization with no SSR
+const DataVisualizationComponent = dynamic(() => import('@/components/ar/DataVisualization'), { ssr: false });
 
 export default function InvestorRelationsPage() {
   const [selectedPeriod, setSelectedPeriod] = useState('1Y');
@@ -123,8 +128,9 @@ export default function InvestorRelationsPage() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 to-blue-50 dark:from-gray-900 dark:to-gray-800">      
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    <PageTransition>
+      <div className="min-h-screen bg-gradient-to-br from-slate-50 to-blue-50 dark:from-gray-900 dark:to-gray-800 aurora-bg">      
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {/* Back Button */}
         <Link href="/" className="inline-flex items-center text-gray-600 hover:text-blue-600 transition-colors mb-8">
           <ArrowLeft className="w-5 h-5 mr-2" />
@@ -161,67 +167,90 @@ export default function InvestorRelationsPage() {
         {/* Key Metrics */}
         <section className="mb-12">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            <div className="bg-white p-6 rounded-xl shadow-lg border border-gray-100">
-              <div className="flex items-center justify-between mb-4">
-                <div className="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center">
-                  <DollarSign className="w-6 h-6 text-blue-600" />
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+            >
+              <GlassCard className="p-6">
+                <div className="flex items-center justify-between mb-4">
+                  <div className="w-12 h-12 bg-blue-100 dark:bg-blue-900/30 rounded-lg flex items-center justify-center">
+                    <DollarSign className="w-6 h-6 text-blue-600 dark:text-blue-400" />
+                  </div>
+                  <span className="text-green-600 dark:text-green-400 text-sm font-medium">+24%</span>
                 </div>
-                <span className="text-green-600 text-sm font-medium">+24%</span>
-              </div>
-              <h3 className="text-2xl font-bold text-gray-900 mb-1">
-                {formatCurrency(performanceMetrics.totalInvestments)}
-              </h3>
-              <p className="text-gray-600">Total Investments</p>
-            </div>
+                <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-1">
+                  {formatCurrency(performanceMetrics.totalInvestments)}
+                </h3>
+                <p className="text-gray-600 dark:text-gray-300">Total Investments</p>
+              </GlassCard>
+            </motion.div>
 
-            <div className="bg-white p-6 rounded-xl shadow-lg border border-gray-100">
-              <div className="flex items-center justify-between mb-4">
-                <div className="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center">
-                  <TrendingUp className="w-6 h-6 text-green-600" />
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.1 }}
+            >
+              <GlassCard className="p-6">
+                <div className="flex items-center justify-between mb-4">
+                  <div className="w-12 h-12 bg-green-100 dark:bg-green-900/30 rounded-lg flex items-center justify-center">
+                    <TrendingUp className="w-6 h-6 text-green-600 dark:text-green-400" />
+                  </div>
+                  <span className="text-green-600 dark:text-green-400 text-sm font-medium">+{performanceMetrics.averageGrowth}%</span>
                 </div>
-                <span className="text-green-600 text-sm font-medium">+{performanceMetrics.averageGrowth}%</span>
-              </div>
-              <h3 className="text-2xl font-bold text-gray-900 mb-1">
-                {formatCurrency(performanceMetrics.portfolioValue)}
-              </h3>
-              <p className="text-gray-600">Portfolio Value</p>
-            </div>
+                <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-1">
+                  {formatCurrency(performanceMetrics.portfolioValue)}
+                </h3>
+                <p className="text-gray-600 dark:text-gray-300">Portfolio Value</p>
+              </GlassCard>
+            </motion.div>
 
-            <div className="bg-white p-6 rounded-xl shadow-lg border border-gray-100">
-              <div className="flex items-center justify-between mb-4">
-                <div className="w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center">
-                  <Building className="w-6 h-6 text-purple-600" />
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.2 }}
+            >
+              <GlassCard className="p-6">
+                <div className="flex items-center justify-between mb-4">
+                  <div className="w-12 h-12 bg-purple-100 dark:bg-purple-900/30 rounded-lg flex items-center justify-center">
+                    <Building className="w-6 h-6 text-purple-600 dark:text-purple-400" />
+                  </div>
+                  <span className="text-blue-600 dark:text-blue-400 text-sm font-medium">Active</span>
                 </div>
-                <span className="text-blue-600 text-sm font-medium">Active</span>
-              </div>
-              <h3 className="text-2xl font-bold text-gray-900 mb-1">
-                {performanceMetrics.activeCompanies}
-              </h3>
-              <p className="text-gray-600">Portfolio Companies</p>
-            </div>
+                <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-1">
+                  {performanceMetrics.activeCompanies}
+                </h3>
+                <p className="text-gray-600 dark:text-gray-300">Portfolio Companies</p>
+              </GlassCard>
+            </motion.div>
 
-            <div className="bg-white p-6 rounded-xl shadow-lg border border-gray-100">
-              <div className="flex items-center justify-between mb-4">
-                <div className="w-12 h-12 bg-orange-100 rounded-lg flex items-center justify-center">
-                  <BarChart3 className="w-6 h-6 text-orange-600" />
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.3 }}
+            >
+              <GlassCard className="p-6">
+                <div className="flex items-center justify-between mb-4">
+                  <div className="w-12 h-12 bg-orange-100 dark:bg-orange-900/30 rounded-lg flex items-center justify-center">
+                    <BarChart3 className="w-6 h-6 text-orange-600 dark:text-orange-400" />
+                  </div>
+                  <span className="text-green-600 dark:text-green-400 text-sm font-medium">+92%</span>
                 </div>
-                <span className="text-green-600 text-sm font-medium">+92%</span>
-              </div>
-              <h3 className="text-2xl font-bold text-gray-900 mb-1">
-                {formatCurrency(performanceMetrics.totalReturns)}
-              </h3>
-              <p className="text-gray-600">Total Returns</p>
-            </div>
+                <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-1">
+                  {formatCurrency(performanceMetrics.totalReturns)}
+                </h3>
+                <p className="text-gray-600 dark:text-gray-300">Total Returns</p>
+              </GlassCard>
+            </motion.div>
           </div>
         </section>
 
         {/* Performance Chart Section */}
         <section className="mb-12">
-          <div className="bg-white rounded-2xl shadow-xl border border-gray-100 p-8">
+          <GlassCard className="p-8">
             <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-8">
               <div>
-                <h2 className="text-2xl font-bold text-gray-900 mb-2">Portfolio Performance</h2>
-                <p className="text-gray-600">Track our portfolio value growth over time</p>
+                <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-2">Portfolio Performance</h2>
+                <p className="text-gray-600 dark:text-gray-300">Track our portfolio value growth over time</p>
               </div>
               <div className="flex items-center space-x-2 mt-4 sm:mt-0">
                 {periods.map((period) => (
@@ -231,7 +260,7 @@ export default function InvestorRelationsPage() {
                     className={`px-3 py-2 rounded-lg text-sm font-medium transition-colors ${
                       selectedPeriod === period
                         ? 'bg-blue-600 text-white'
-                        : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
+                        : 'bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-600'
                     }`}
                   >
                     {period}
@@ -240,65 +269,72 @@ export default function InvestorRelationsPage() {
               </div>
             </div>
             
-            {/* Chart Placeholder */}
-            <div className="h-64 bg-gradient-to-r from-blue-50 to-indigo-50 rounded-xl flex items-center justify-center border-2 border-dashed border-blue-200">
-              <div className="text-center">
-                <BarChart3 className="w-12 h-12 text-blue-400 mx-auto mb-4" />
-                <p className="text-gray-600">Interactive Performance Chart</p>
-                <p className="text-gray-500 text-sm">Chart integration available in full implementation</p>
-              </div>
+            {/* 3D Data Visualization */}
+            <div className="h-96 rounded-xl overflow-hidden">
+              <DataVisualizationComponent 
+                data={[
+                  { id: '1', value: 2000000, label: '2024 Q1', color: '#3b82f6' },
+                  { id: '2', value: 4000000, label: '2024 Q2', color: '#3b82f6' },
+                  { id: '3', value: 6000000, label: '2024 Q3', color: '#3b82f6' },
+                  { id: '4', value: 8000000, label: '2024 Q4', color: '#3b82f6' },
+                  { id: '5', value: 12000000, label: '2025 Q1', color: '#10b981' },
+                  { id: '6', value: 15600000, label: '2025 Q2', color: '#10b981' },
+                ]}
+                type="bar"
+                title="Portfolio Growth"
+              />
             </div>
-          </div>
+          </GlassCard>
         </section>
 
         {/* Portfolio Companies */}
         <section className="mb-12">
-          <div className="bg-white rounded-2xl shadow-xl border border-gray-100 p-8">
-            <h2 className="text-2xl font-bold text-gray-900 mb-6">Portfolio Companies</h2>
+          <GlassCard className="p-8">
+            <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-6">Portfolio Companies</h2>
             <div className="overflow-x-auto">
               <table className="w-full">
                 <thead>
-                  <tr className="border-b border-gray-200">
-                    <th className="text-left py-4 px-2 text-gray-600 font-medium">Company</th>
-                    <th className="text-left py-4 px-2 text-gray-600 font-medium">Investment</th>
-                    <th className="text-left py-4 px-2 text-gray-600 font-medium">Valuation</th>
-                    <th className="text-left py-4 px-2 text-gray-600 font-medium">Ownership</th>
-                    <th className="text-left py-4 px-2 text-gray-600 font-medium">Growth</th>
-                    <th className="text-left py-4 px-2 text-gray-600 font-medium">Status</th>
+                  <tr className="border-b border-gray-200 dark:border-gray-700">
+                    <th className="text-left py-4 px-2 text-gray-600 dark:text-gray-400 font-medium">Company</th>
+                    <th className="text-left py-4 px-2 text-gray-600 dark:text-gray-400 font-medium">Investment</th>
+                    <th className="text-left py-4 px-2 text-gray-600 dark:text-gray-400 font-medium">Valuation</th>
+                    <th className="text-left py-4 px-2 text-gray-600 dark:text-gray-400 font-medium">Ownership</th>
+                    <th className="text-left py-4 px-2 text-gray-600 dark:text-gray-400 font-medium">Growth</th>
+                    <th className="text-left py-4 px-2 text-gray-600 dark:text-gray-400 font-medium">Status</th>
                   </tr>
                 </thead>
                 <tbody>
                   {portfolioCompanies.map((company, index) => (
-                    <tr key={index} className="border-b border-gray-100 hover:bg-gray-50 dark:bg-gray-900">
+                    <tr key={index} className="border-b border-gray-100 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-800">
                       <td className="py-4 px-2">
                         <div>
-                          <div className="font-semibold text-gray-900">{company.name}</div>
-                          <div className="text-sm text-gray-500">{company.industry}</div>
+                          <div className="font-semibold text-gray-900 dark:text-white">{company.name}</div>
+                          <div className="text-sm text-gray-600 dark:text-gray-300">{company.industry}</div>
                         </div>
                       </td>
                       <td className="py-4 px-2">
                         <div>
-                          <div className="font-medium text-gray-900">{formatCurrency(company.investmentAmount)}</div>
-                          <div className="text-sm text-gray-500">{new Date(company.investmentDate).getFullYear()}</div>
+                          <div className="font-medium text-gray-900 dark:text-white">{formatCurrency(company.investmentAmount)}</div>
+                          <div className="text-sm text-gray-600 dark:text-gray-300">{new Date(company.investmentDate).getFullYear()}</div>
                         </div>
                       </td>
                       <td className="py-4 px-2">
-                        <div className="font-medium text-gray-900">{formatCurrency(company.currentValuation)}</div>
+                        <div className="font-medium text-gray-900 dark:text-white">{formatCurrency(company.currentValuation)}</div>
                       </td>
                       <td className="py-4 px-2">
-                        <div className="font-medium text-gray-900">{company.ownership}%</div>
+                        <div className="font-medium text-gray-900 dark:text-white">{company.ownership}%</div>
                       </td>
                       <td className="py-4 px-2">
                         <div className="flex items-center">
-                          <span className="text-green-600 font-medium">+{company.growth}%</span>
-                          <TrendingUp className="w-4 h-4 text-green-600 ml-1" />
+                          <span className="text-green-600 dark:text-green-400 font-medium">+{company.growth}%</span>
+                          <TrendingUp className="w-4 h-4 text-green-600 dark:text-green-400 ml-1" />
                         </div>
                       </td>
                       <td className="py-4 px-2">
                         <span className={`px-3 py-1 rounded-full text-xs font-medium ${
                           company.status === 'Active' 
-                            ? 'bg-green-100 text-green-700' 
-                            : 'bg-yellow-100 text-yellow-700'
+                            ? 'bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-400' 
+                            : 'bg-yellow-100 dark:bg-yellow-900/30 text-yellow-700 dark:text-yellow-400'
                         }`}>
                           {company.status}
                         </span>
@@ -308,42 +344,55 @@ export default function InvestorRelationsPage() {
                 </tbody>
               </table>
             </div>
-          </div>
+          </GlassCard>
         </section>
 
         {/* Key Highlights */}
         <section className="mb-12">
-          <div className="text-center mb-8">
-            <h2 className="text-3xl font-bold text-gray-900 mb-4">Investment Highlights</h2>
-            <p className="text-lg text-gray-600 max-w-3xl mx-auto">
+          <motion.div 
+            className="text-center mb-8"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+          >
+            <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-4">Investment Highlights</h2>
+            <p className="text-lg text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
               Key factors driving our portfolio performance and strategic positioning
             </p>
-          </div>
+          </motion.div>
           
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             {keyHighlights.map((highlight, index) => (
-              <div key={index} className="bg-white p-6 rounded-xl shadow-lg border border-gray-100 text-center">
-                <div className={`w-16 h-16 bg-gradient-to-r ${highlight.color} rounded-xl flex items-center justify-center mx-auto mb-4`}>
-                  <highlight.icon className="w-8 h-8 text-white" />
-                </div>
-                <h3 className="text-lg font-semibold text-gray-900 mb-2">{highlight.title}</h3>
-                <p className="text-gray-600 text-sm">{highlight.description}</p>
-              </div>
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: index * 0.1 }}
+              >
+                <GlassCard className="p-6 text-center">
+                  <div className={`w-16 h-16 bg-gradient-to-r ${highlight.color} rounded-xl flex items-center justify-center mx-auto mb-4`}>
+                    <highlight.icon className="w-8 h-8 text-white" />
+                  </div>
+                  <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-2">{highlight.title}</h3>
+                  <p className="text-gray-600 dark:text-gray-300 text-sm">{highlight.description}</p>
+                </GlassCard>
+              </motion.div>
             ))}
           </div>
         </section>
 
         {/* Reports & Documents */}
         <section className="mb-12">
-          <div className="bg-white rounded-2xl shadow-xl border border-gray-100 p-8">
+          <GlassCard className="p-8">
             <div className="flex items-center justify-between mb-6">
               <div>
-                <h2 className="text-2xl font-bold text-gray-900 mb-2">Reports & Documents</h2>
-                <p className="text-gray-600">Access our latest financial reports and investment analyses</p>
+                <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-2">Reports & Documents</h2>
+                <p className="text-gray-600 dark:text-gray-300">Access our latest financial reports and investment analyses</p>
               </div>
               <Link
                 href="/investor-relations/reports"
-                className="inline-flex items-center text-blue-600 font-medium hover:text-blue-700"
+                className="inline-flex items-center text-blue-600 dark:text-blue-400 font-medium hover:text-blue-700 dark:hover:text-blue-300"
               >
                 View All Reports
                 <ExternalLink className="ml-2 w-4 h-4" />
@@ -352,26 +401,46 @@ export default function InvestorRelationsPage() {
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               {reports.map((report, index) => (
-                <div key={index} className="border border-gray-200 rounded-lg p-6 hover:border-blue-200 transition-colors">
+                <motion.div
+                  key={index}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: index * 0.1 }}
+                  className="border border-gray-200 dark:border-gray-700 rounded-lg p-6 hover:border-blue-200 dark:hover:border-blue-700 transition-colors"
+                >
                   <div className="flex items-start justify-between mb-4">
                     <div className="flex-1">
-                      <h3 className="font-semibold text-gray-900 mb-1">{report.title}</h3>
-                      <p className="text-sm text-gray-500 mb-2">{report.type} • {report.size}</p>
-                      <p className="text-xs text-gray-400">{new Date(report.date).toLocaleDateString()}</p>
+                      <h3 className="font-semibold text-gray-900 dark:text-white mb-1">{report.title}</h3>
+                      <p className="text-sm text-gray-600 dark:text-gray-300 mb-2">{report.type} • {report.size}</p>
+                      <p className="text-xs text-gray-500 dark:text-gray-400">{new Date(report.date).toLocaleDateString()}</p>
                     </div>
                   </div>
-                  <button className="inline-flex items-center px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors text-sm">
-                    <Download className="w-4 h-4 mr-2" />
-                    Download
-                  </button>
-                </div>
+                  {report.downloadUrl && report.downloadUrl !== '#' ? (
+                    <a 
+                      href={report.downloadUrl}
+                      download
+                      className="inline-flex items-center px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors text-sm"
+                    >
+                      <Download className="w-4 h-4 mr-2" />
+                      Download
+                    </a>
+                  ) : (
+                    <button 
+                      disabled
+                      className="inline-flex items-center px-4 py-2 bg-gray-400 text-white rounded-lg text-sm cursor-not-allowed"
+                    >
+                      Coming Soon
+                    </button>
+                  )}
+                </motion.div>
               ))}
             </div>
-          </div>
+          </GlassCard>
         </section>
 
         {/* Contact IR */}
-        <section className="bg-gradient-to-r from-blue-600 to-indigo-600 text-white rounded-2xl p-8 text-center">
+        <section className="bg-gradient-to-r from-blue-600 to-indigo-600 text-white rounded-2xl p-8 text-center aurora-bg">
           <h2 className="text-3xl font-bold mb-4">Investor Relations Contact</h2>
           <p className="text-xl text-blue-100 mb-8 max-w-2xl mx-auto">
             Have questions about our portfolio or investment opportunities? 
@@ -393,5 +462,6 @@ export default function InvestorRelationsPage() {
           </div>
         </section>
       </div>    </div>
+    </PageTransition>
   );
 }

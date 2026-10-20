@@ -27,14 +27,21 @@ export async function POST(request: NextRequest) {
   try {
     const body = await request.json();
     
-    const firstName = body.firstName || body.first_name;
-    const lastName = body.lastName || body.last_name;
+    let firstName = body.firstName || body.first_name;
+    let lastName = body.lastName || body.last_name;
     const email = body.email;
     const phone = body.phone;
     const company = body.company;
     const subject = body.subject;
     const message = body.message;
     const inquiryType = body.inquiryType || body.inquiry_type || 'general';
+
+    // Fallback to name field if firstName/lastName not provided
+    if (!firstName && !lastName && body.name) {
+      const nameParts = body.name.trim().split(/\s+/);
+      firstName = nameParts[0];
+      lastName = nameParts.slice(1).join(' ');
+    }
 
     // Validate required fields
     if (!firstName || !lastName || !email || !subject || !message) {

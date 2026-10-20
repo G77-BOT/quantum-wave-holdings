@@ -17,7 +17,7 @@ export default function BostreamPage() {
                 <h1 className="text-xl font-bold bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent">
                   Quantum Wave Holdings
                 </h1>
-                <p className="text-xs text-gray-500">Corporate Excellence</p>
+                <p className="text-xs text-gray-600">Corporate Excellence</p>
               </div>
             </Link>
             <nav className="hidden md:flex space-x-6">

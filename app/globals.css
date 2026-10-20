@@ -5,56 +5,69 @@
 @layer base {
   :root {
     /* AR-Specific Variables */
-    --ar-glow: 221.2 83.2% 53.3%;
+    --ar-glow: 199 89% 48%;
     --ar-glow-intensity: 0.4;
     --ar-glow-spread: 0.5;
-    --ar-shadow-color: 221.2 83.2% 53.3%;
+    --ar-shadow-color: 199 89% 48%;
     --ar-shadow-intensity: 0.15;
     --ar-hover-scale: 1.02;
     --ar-transition-duration: 0.3s;
+    
+    /* Glassmorphism/Aurora Theme - Light Mode */
     --background: 0 0% 100%;
     --foreground: 222.2 84% 4.9%;
     --card: 0 0% 100%;
     --card-foreground: 222.2 84% 4.9%;
     --popover: 0 0% 100%;
     --popover-foreground: 222.2 84% 4.9%;
-    --primary: 221.2 83.2% 53.3%;
+    --primary: 199 89% 48%;
     --primary-foreground: 210 40% 98%;
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
+    --secondary: 239 84% 67%;
+    --secondary-foreground: 210 40% 98%;
     --muted: 210 40% 96.1%;
     --muted-foreground: 215.4 16.3% 46.9%;
-    --accent: 210 40% 96.1%;
+    --accent: 45 93% 47%;
     --accent-foreground: 222.2 47.4% 11.2%;
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 210 40% 98%;
     --border: 214.3 31.8% 91.4%;
     --input: 214.3 31.8% 91.4%;
-    --ring: 221.2 83.2% 53.3%;
-    --radius: 0.5rem;
+    --ring: 199 89% 48%;
+    --radius: 0.75rem;
     --ar-border-radius: 0.75rem;
+    
+    /* Glassmorphism Variables */
+    --glass-bg: rgba(255, 255, 255, 0.7);
+    --glass-border: rgba(255, 255, 255, 0.3);
+    --glass-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
   }
  
   .dark {
-    --background: 222.2 84% 4.9%;
-    --foreground: 210 40% 98%;
-    --card: 222.2 84% 4.9%;
-    --card-foreground: 210 40% 98%;
-    --popover: 222.2 84% 4.9%;
-    --popover-foreground: 210 40% 98%;
-    --primary: 217.2 91.2% 59.8%;
-    --primary-foreground: 222.2 47.4% 11.2%;
-    --secondary: 217.2 32.6% 17.5%;
-    --secondary-foreground: 210 40% 98%;
-    --muted: 217.2 32.6% 17.5%;
-    --muted-foreground: 215 20.2% 65.1%;
-    --accent: 217.2 32.6% 17.5%;
-    --accent-foreground: 210 40% 98%;
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 210 40% 98%;
-    --border: 217.2 32.6% 17.5%;
-    --input: 217.2 32.6% 17.5%;
-    --ring: 224.3 76.3% 48%;
+    /* Glassmorphism/Aurora Theme - Dark Mode - Improved Colors */
+    --background: 220 30% 12%;
+    --foreground: 220 20% 95%;
+    --card: 220 25% 15%;
+    --card-foreground: 220 20% 95%;
+    --popover: 220 25% 15%;
+    --popover-foreground: 220 20% 95%;
+    --primary: 199 89% 48%;
+    --primary-foreground: 220 30% 12%;
+    --secondary: 217 30% 25%;
+    --secondary-foreground: 220 20% 95%;
+    --muted: 217 25% 20%;
+    --muted-foreground: 220 15% 70%;
+    --accent: 217 30% 25%;
+    --accent-foreground: 220 20% 95%;
+    --destructive: 0 62% 50%;
+    --destructive-foreground: 220 20% 95%;
+    --border: 217 25% 20%;
+    --input: 217 25% 20%;
+    --ring: 199 89% 48%;
+    
+    /* Glassmorphism Variables - Dark */
+    --glass-bg: rgba(255, 255, 255, 0.08);
+    --glass-border: rgba(255, 255, 255, 0.15);
+    --glass-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
   }
 
   .cyberpunk {
@@ -77,6 +90,10 @@
     --border: 240 10% 20%;
     --input: 240 10% 20%;
     --ring: 182 100% 50%;
+    
+    --glass-bg: rgba(0, 255, 255, 0.05);
+    --glass-border: rgba(0, 255, 255, 0.2);
+    --glass-shadow: 0 8px 32px rgba(0, 255, 255, 0.1);
   }
 }
 
@@ -85,11 +102,19 @@
     border-color: hsl(var(--border));
   }
   
+  html {
+    scroll-behavior: smooth;
+  }
+  
   body {
     background-color: hsl(var(--background));
     color: hsl(var(--foreground));
     min-height: 100vh;
     font-feature-settings: "rlig" 1, "calt" 1;
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-space-grotesk), sans-serif;
   }
 }
 
@@ -162,6 +187,34 @@
   background: rgba(255, 255, 255, 0.1);
   backdrop-filter: blur(10px);
   border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+/* Glassmorphism Card */
+.glass-card {
+  background: var(--glass-bg);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid var(--glass-border);
+  box-shadow: var(--glass-shadow);
+}
+
+/* Aurora Gradient Background */
+.aurora-bg {
+  background: 
+    radial-gradient(at 0% 0%, hsla(199, 89%, 48%, 0.15) 0, transparent 50%), 
+    radial-gradient(at 50% 0%, hsla(239, 84%, 67%, 0.15) 0, transparent 50%), 
+    radial-gradient(at 100% 0%, hsla(45, 93%, 47%, 0.15) 0, transparent 50%),
+    radial-gradient(at 0% 100%, hsla(280, 60%, 50%, 0.1) 0, transparent 50%),
+    radial-gradient(at 100% 100%, hsla(199, 89%, 48%, 0.1) 0, transparent 50%);
+}
+
+.dark .aurora-bg {
+  background: 
+    radial-gradient(at 0% 0%, hsla(199, 89%, 48%, 0.2) 0, transparent 50%), 
+    radial-gradient(at 50% 0%, hsla(239, 84%, 67%, 0.2) 0, transparent 50%), 
+    radial-gradient(at 100% 0%, hsla(45, 93%, 47%, 0.2) 0, transparent 50%),
+    radial-gradient(at 0% 100%, hsla(280, 60%, 50%, 0.15) 0, transparent 50%),
+    radial-gradient(at 100% 100%, hsla(199, 89%, 48%, 0.15) 0, transparent 50%);
 }
 
 /* Floating animation */

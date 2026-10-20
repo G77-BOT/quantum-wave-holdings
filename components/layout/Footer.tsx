@@ -1,4 +1,7 @@
+'use client';
+
 import Link from 'next/link';
+import { useState } from 'react';
 import { Mail, Phone, MapPin, Linkedin, Twitter, ExternalLink } from 'lucide-react';
 
 const navigation = {
@@ -43,6 +46,41 @@ const socialLinks = [
 ];
 
 export default function Footer() {
+  const [email, setEmail] = useState('');
+  const [subscribed, setSubscribed] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [message, setMessage] = useState('');
+
+  const handleSubscribe = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setLoading(true);
+    setMessage('');
+
+    try {
+      const response = await fetch('/api/newsletter', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ email }),
+      });
+
+      const data = await response.json();
+
+      if (response.ok) {
+        setSubscribed(true);
+        setMessage(data.message || 'Thank you for subscribing!');
+        setEmail('');
+      } else {
+        setMessage(data.error || 'Failed to subscribe. Please try again.');
+      }
+    } catch (error) {
+      setMessage('Failed to subscribe. Please try again.');
+    } finally {
+      setLoading(false);
+    }
+  };
+
   return (
     <footer className="bg-gray-900 dark:bg-black text-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12">
@@ -187,44 +225,58 @@ export default function Footer() {
               </p>
             </div>
             <div className="flex flex-col sm:flex-row sm:max-w-md lg:max-w-xs">
-              <input
-                type="email"
-                placeholder="Enter your email"
-                className="px-4 py-2 bg-gray-800 border border-gray-700 rounded-lg sm:rounded-r-none text-white placeholder-gray-400 focus:outline-none focus:border-blue-500"
-              />
-              <button className="mt-2 sm:mt-0 px-6 py-2 bg-blue-600 hover:bg-blue-700 rounded-lg sm:rounded-l-none font-medium transition-colors">
-                Subscribe
-              </button>
+              <form onSubmit={handleSubscribe} className="flex flex-col sm:flex-row">
+                <input
+                  type="email"
+                  placeholder="Enter your email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  disabled={subscribed || loading}
+                  className="px-4 py-2 bg-gray-800 border border-gray-700 rounded-lg sm:rounded-r-none text-white placeholder-gray-400 focus:outline-none focus:border-blue-500 disabled:opacity-50"
+                />
+                <button 
+                  type="submit"
+                  disabled={subscribed || loading || !email}
+                  className="mt-2 sm:mt-0 px-6 py-2 bg-blue-600 hover:bg-blue-700 rounded-lg sm:rounded-l-none font-medium transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                >
+                  {loading ? 'Subscribing...' : subscribed ? 'Subscribed' : 'Subscribe'}
+                </button>
+              </form>
+              {message && (
+                <p className={`text-sm mt-2 ${subscribed ? 'text-green-400' : 'text-red-400'}`}>
+                  {message}
+                </p>
+              )}
             </div>
           </div>
         </div>
 
         {/* Bottom Bar */}
         <div className="mt-8 sm:mt-12 pt-6 sm:pt-8 border-t border-gray-800">
-          <div className="flex flex-col sm:flex-row justify-between items-center text-center sm:text-left">
+          <div className="flex flex-col-reverse sm:flex-row justify-between items-center text-center sm:text-left gap-4">
             <p className="text-gray-400 text-xs sm:text-sm">
               &copy; {new Date().getFullYear()} Quantum Wave Holdings. All rights reserved.
             </p>
-            <div className="mt-4 sm:mt-0 flex space-x-6">
-              <p className="text-gray-500 text-sm">
+            <div className="flex flex-col sm:flex-row items-center gap-2 sm:gap-6">
+              <p className="text-gray-500 text-xs sm:text-sm text-center sm:text-left">
                 Founded by Mohamud Abdiaziz Mohamed • VP Joseph Jackson
               </p>
-            </div>
-            
-            {/* Social Links */}
-            <div className="flex space-x-4 mt-4 sm:mt-0">
-              {socialLinks.map((item) => (
-                <a
-                  key={item.name}
-                  href={item.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-gray-400 hover:text-white transition-colors"
-                  title={item.name}
-                >
-                  <item.icon className="w-5 h-5" />
-                </a>
-              ))}
+              
+              {/* Social Links */}
+              <div className="flex space-x-4">
+                {socialLinks.map((item) => (
+                  <a
+                    key={item.name}
+                    href={item.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-gray-400 hover:text-white transition-colors"
+                    title={item.name}
+                  >
+                    <item.icon className="w-5 h-5" />
+                  </a>
+                ))}
+              </div>
             </div>
           </div>
         </div>
