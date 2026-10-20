@@ -51,6 +51,15 @@ export async function POST(request: NextRequest) {
       }, { status: 400 });
     }
 
+    // Check DATABASE_URL is set
+    if (!process.env.DATABASE_URL || process.env.DATABASE_URL.includes('host:port/db')) {
+      console.error('DATABASE_URL is not properly configured');
+      return NextResponse.json({
+        success: false,
+        error: "Database not configured. Please contact support."
+      }, { status: 500 });
+    }
+
     // Insert submission into database
     await db.insert(contactSubmissions).values({
       firstName,
@@ -69,11 +78,11 @@ export async function POST(request: NextRequest) {
       success: true, 
       message: "Thank you for your message. We'll get back to you soon!" 
     });
-  } catch (error) {
+  } catch (error: any) {
     console.error('Error submitting contact form:', error);
     return NextResponse.json({ 
       success: false, 
-      message: "Failed to send message. Please try again." 
+      error: error.message || "Failed to send message. Please try again." 
     }, { status: 500 });
   }
 }

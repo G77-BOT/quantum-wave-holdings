@@ -7,7 +7,7 @@ export async function POST(request: NextRequest) {
   try {
     const body = await request.json();
     
-    const { email, firstName, lastName, interests } = body;
+    const { email } = body;
 
     // Validate required fields
     if (!email) {
@@ -48,12 +48,9 @@ export async function POST(request: NextRequest) {
       }, { status: 409 });
     }
 
-    // Insert subscriber into database
+    // Insert subscriber into database (only email required)
     await db.insert(newsletterSubscribers).values({
       email,
-      firstName: firstName || null,
-      lastName: lastName || null,
-      interests: interests || null,
       isActive: true,
       subscribedAt: new Date(),
     });
