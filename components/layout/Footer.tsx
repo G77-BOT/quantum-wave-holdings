@@ -3,6 +3,7 @@
 import Link from 'next/link';
 import { useState } from 'react';
 import { Mail, Phone, MapPin, Linkedin, Twitter, ExternalLink } from 'lucide-react';
+import { portfolioLinks, site } from '@/lib/content/site';
 
 const navigation = {
   company: [
@@ -13,10 +14,10 @@ const navigation = {
     { name: 'Contact', href: '/contact' },
   ],
   portfolio: [
-    { name: 'Our Companies', href: '/portfolio' },
-    { name: 'BotStream', href: '/companies/bostream', external: true },
-    { name: 'Investment Criteria', href: '/portfolio/criteria' },
-    { name: 'Success Stories', href: '/portfolio/success-stories' },
+    { name: 'Our Companies', href: '/portfolio', external: false },
+    ...portfolioLinks,
+    { name: 'Investment Criteria', href: '/portfolio/criteria', external: false },
+    { name: 'Success Stories', href: '/portfolio/success-stories', external: false },
   ],
   investors: [
     { name: 'Overview', href: '/investor-relations' },
@@ -82,17 +83,17 @@ export default function Footer() {
   };
 
   return (
-    <footer className="bg-gray-900 dark:bg-black text-white">
+    <footer className="bg-gray-900 dark:bg-black text-white border-t border-gray-800">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12">
         {/* Main Footer Content */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-6 gap-6 sm:gap-8">
           {/* Company Info */}
           <div className="sm:col-span-2 lg:col-span-2">
             <div className="flex items-center space-x-3 mb-4">
-              <div className="w-10 h-10 flex-shrink-0 bg-gradient-to-r from-blue-600 to-indigo-600 rounded-lg flex items-center justify-center">
+              <div className="icon-glow w-10 h-10 flex-shrink-0 bg-gradient-to-r from-blue-600 to-indigo-600 rounded-lg flex items-center justify-center">
                 <span className="text-white font-bold text-sm">QWH</span>
               </div>
-              <h3 className="text-lg sm:text-xl font-bold">Quantum Wave Holdings</h3>
+              <h3 className="text-lg sm:text-xl font-bold gradient-text-animated">Quantum Wave Holdings</h3>
             </div>
             <p className="text-gray-300 text-sm mb-4 sm:mb-6">
               Transforming ideas into reality through strategic investments and innovative solutions.
@@ -104,23 +105,23 @@ export default function Footer() {
             
             {/* Contact Info */}
             <div className="space-y-3">
-              <div className="flex items-center text-gray-300">
+              <div className="flex items-center text-gray-300 min-w-0">
                 <Mail className="w-4 h-4 mr-3 text-blue-400" />
-                <a href="mailto:contact@quantumwaveholdings.com" className="hover:text-white transition-colors">
-                  contact@quantumwaveholdings.com
+                <a href={`mailto:${site.email}`} className="hover:text-white transition-colors break-words">
+                  {site.email}
                 </a>
               </div>
-              <div className="flex items-center text-gray-300">
+              <div className="flex items-center text-gray-300 min-w-0">
                 <Phone className="w-4 h-4 mr-3 text-blue-400" />
-                <a href="tel:+15551234567" className="hover:text-white transition-colors">
-                  +1 (555) 123-4567
+                <a href={site.phoneHref} className="hover:text-white transition-colors">
+                  {site.phone}
                 </a>
               </div>
               <div className="flex items-start text-gray-300">
                 <MapPin className="w-4 h-4 mr-3 mt-1 text-blue-400" />
                 <div>
-                  <div>Innovation District</div>
-                  <div>Business Center, Global Operations</div>
+                  <div>{site.addressLines[0]}</div>
+                  <div>{site.addressLines[1]}</div>
                 </div>
               </div>
             </div>
@@ -155,7 +156,7 @@ export default function Footer() {
                 <li key={item.name}>
                   {item.external ? (
                     <a 
-                      href="https://botstream.ca"
+                      href={item.href}
                       target="_blank"
                       rel="noopener noreferrer"
                       className="text-gray-300 hover:text-white transition-colors flex items-center"
@@ -259,7 +260,7 @@ export default function Footer() {
             </p>
             <div className="flex flex-col sm:flex-row items-center gap-2 sm:gap-6">
               <p className="text-gray-500 text-xs sm:text-sm text-center sm:text-left">
-                Founded by Mohamud Abdiaziz Mohamed • VP Joseph Jackson
+                {site.founders}
               </p>
               
               {/* Social Links */}

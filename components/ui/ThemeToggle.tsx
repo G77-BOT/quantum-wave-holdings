@@ -1,24 +1,20 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { Moon, Sun, Monitor } from 'lucide-react';
 import { useTheme } from '../providers/ThemeProvider';
 
+/**
+ * Theme controls render their final markup on the server.
+ *
+ * The previous `mounted` gate emitted an `animate-pulse` skeleton into the
+ * prerendered HTML, so first paint showed an empty box. The server and the
+ * client now agree on the default (`system` -> Monitor / Sun), and the saved
+ * preference is applied in the provider's effect.
+ */
+
 export function ThemeToggle() {
   const { theme, setTheme } = useTheme();
-  const [mounted, setMounted] = useState(false);
-
-  useEffect(() => {
-    setMounted(true);
-  }, []);
-
-  if (!mounted) {
-    return (
-      <div className="w-9 h-9 rounded-lg border border-gray-300 dark:border-gray-600 flex items-center justify-center">
-        <div className="w-4 h-4 bg-gray-300 dark:bg-gray-600 rounded animate-pulse" />
-      </div>
-    );
-  }
 
   const themes = [
     { value: 'light', icon: Sun, label: 'Light' },
@@ -28,29 +24,26 @@ export function ThemeToggle() {
 
   return (
     <div className="relative">
-      <div className="flex items-center border border-gray-300 dark:border-gray-600 rounded-lg p-1 bg-white dark:bg-gray-800">
+      <div className="flex items-center rounded-lg border border-gray-300 bg-white p-1 dark:border-gray-600 dark:bg-gray-800">
         {themes.map(({ value, icon: Icon, label }) => (
           <button
             key={value}
+            type="button"
             onClick={() => setTheme(value)}
             className={`
-              flex items-center justify-center w-8 h-8 rounded-md transition-colors
-              ${theme === value 
-                ? 'bg-blue-100 dark:bg-blue-900 text-blue-600 dark:text-blue-400' 
-                : 'text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700'
+              flex h-8 w-8 items-center justify-center rounded-md transition-colors
+              ${
+                theme === value
+                  ? 'bg-blue-100 text-blue-600 dark:bg-blue-900 dark:text-blue-400'
+                  : 'text-gray-500 hover:bg-gray-100 hover:text-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-gray-300'
               }
             `}
             title={label}
             aria-label={`Switch to ${label} theme`}
+            aria-pressed={theme === value}
             data-testid={`theme-toggle-${value}`}
           >
-            {value === 'light' ? (
-              <Sun data-testid="sun-icon" className="w-4 h-4" />
-            ) : value === 'dark' ? (
-              <Moon data-testid="moon-icon" className="w-4 h-4" />
-            ) : (
-              <Monitor data-testid="monitor-icon" className="w-4 h-4" />
-            )}
+            <Icon className="h-4 w-4" aria-hidden="true" />
           </button>
         ))}
       </div>
@@ -60,19 +53,6 @@ export function ThemeToggle() {
 
 export function ThemeToggleButton() {
   const { theme, setTheme, actualTheme } = useTheme();
-  const [mounted, setMounted] = useState(false);
-
-  useEffect(() => {
-    setMounted(true);
-  }, []);
-
-  if (!mounted) {
-    return (
-      <button className="w-9 h-9 rounded-lg border border-gray-300 dark:border-gray-600 flex items-center justify-center">
-        <div className="w-4 h-4 bg-gray-300 dark:bg-gray-600 rounded animate-pulse" />
-      </button>
-    );
-  }
 
   const toggleTheme = () => {
     if (theme === 'light') {
@@ -84,23 +64,17 @@ export function ThemeToggleButton() {
     }
   };
 
-  const getIcon = () => {
-    if (theme === 'system') {
-      return Monitor;
-    }
-    return actualTheme === 'dark' ? Moon : Sun;
-  };
-
-  const Icon = getIcon();
+  const Icon = theme === 'system' ? Monitor : actualTheme === 'dark' ? Moon : Sun;
 
   return (
     <button
+      type="button"
       onClick={toggleTheme}
-      className="w-9 h-9 rounded-lg border border-gray-300 dark:border-gray-600 flex items-center justify-center text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors bg-white dark:bg-gray-800"
+      className="flex h-9 w-9 items-center justify-center rounded-lg border border-gray-300 bg-white text-gray-500 transition-colors hover:bg-gray-100 hover:text-gray-700 dark:border-gray-600 dark:bg-gray-800 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-gray-300"
       title={`Current theme: ${theme}. Click to cycle through themes.`}
       aria-label="Toggle theme"
     >
-      <Icon className="w-4 h-4" />
+      <Icon className="h-4 w-4" aria-hidden="true" />
     </button>
   );
 }

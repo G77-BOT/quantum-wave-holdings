@@ -25,37 +25,37 @@ async function main() {
 
     // 2. Insert Portfolio Company
     console.log('🏢 Inserting portfolio companies...');
-    const [bostream] = await db.insert(portfolioCompanies).values({
-      name: 'Botstream',
-      slug: 'bostream',
-      description: 'Advanced cryptocurrency trading platform featuring real-time data streaming, professional analytics, and institutional-grade security for modern traders.',
-      shortDescription: 'Crypto Trading Platform',
-      industry: 'FinTech',
-      website: 'https://botstream.ca',
-      founded: '2022',
-      headquarters: 'Toronto, Canada',
+    const [comprenaMarket] = await db.insert(portfolioCompanies).values({
+      name: 'Comprena Market',
+      slug: 'comprena-market',
+      description: 'B2B/B2C e-commerce platform providing seamless buying and selling experiences with advanced analytics and payment solutions.',
+      shortDescription: 'B2B/B2C E-commerce Platform',
+      industry: 'E-Commerce',
+      website: 'https://comprena-market.xyz',
+      founded: '2024',
+      headquarters: 'Global',
       employees: '10-50',
       status: 'active',
-      funding: '$2.5M',
-      valuation: '$15M',
+      funding: 'N/A',
+      valuation: 'N/A',
       featured: true,
-      tags: ['Crypto', 'Trading', 'Real-time', 'Analytics'],
+      tags: ['E-Commerce', 'B2B', 'B2C', 'Payments', 'Analytics'],
     }).returning();
 
     // 3. Insert Metrics
     console.log('📈 Inserting metrics...');
     await db.insert(companyMetrics).values([
       {
-        companyId: bostream.id,
-        metricType: 'uptime',
-        value: '99.9%',
-        label: 'Uptime',
+        companyId: comprenaMarket.id,
+        metricType: 'ownership',
+        value: '100%',
+        label: 'Ownership',
       },
       {
-        companyId: bostream.id,
-        metricType: 'latency',
-        value: '<10ms',
-        label: 'Latency',
+        companyId: comprenaMarket.id,
+        metricType: 'growth',
+        value: '150%',
+        label: 'Growth',
       },
     ]);
 
@@ -73,13 +73,13 @@ async function main() {
         publishedAt: new Date(Date.now() - 2 * 24 * 60 * 60 * 1000), // 2 days ago
       },
       {
-        title: 'Botstream Launches Advanced Trading Features',
-        slug: 'botstream-launches-advanced-trading-features',
-        content: 'We\'ve released several new API endpoints to improve data access and integration capabilities for our enterprise clients. This includes custom websocket feeds and high-frequency execution pipelines.',
-        excerpt: 'New suite of professional trading tools now available for institutional clients.',
+        title: 'Comprena Market Expands to New Markets',
+        slug: 'comprena-market-expands-to-new-markets',
+        content: 'Comprena Market announces strategic expansion plans for international markets, bringing our B2B/B2C e-commerce platform to new regions with enhanced payment solutions and localized features.',
+        excerpt: 'E-commerce platform announces strategic expansion plans for international markets.',
         author: 'Development Team',
         category: 'portfolio',
-        companyId: bostream.id,
+        companyId: comprenaMarket.id,
         featured: true,
         publishedAt: new Date(Date.now() - 5 * 24 * 60 * 60 * 1000), // 5 days ago
       },

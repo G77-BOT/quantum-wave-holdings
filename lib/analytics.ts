@@ -1,6 +1,7 @@
 // Analytics configuration
-// Replace 'G-XXXXXXXXXX' with your actual Google Analytics 4 Measurement ID
-export const GA_MEASUREMENT_ID = process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID || 'G-XXXXXXXXXX';
+// Set NEXT_PUBLIC_GA_MEASUREMENT_ID to a real Google Analytics 4 ID. When it is
+// unset the tag is not rendered at all, instead of shipping a placeholder loader
+export const GA_MEASUREMENT_ID = process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID || '';
 
 // Pageview tracking
 export const pageview = (url: string) => {

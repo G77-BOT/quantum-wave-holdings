@@ -3,7 +3,7 @@
 import Link from 'next/link';
 import { useState } from 'react';
 import { motion } from 'framer-motion';
-import { ArrowLeft, TrendingUp, DollarSign, Building, Calendar, Download, ExternalLink, BarChart3, Users, Target } from 'lucide-react';
+import { ArrowLeft, TrendingUp, DollarSign, Building, Calendar, Download, ExternalLink, BarChart3, Users, Target, ChevronRight } from 'lucide-react';
 import PageTransition from '@/components/ui/PageTransition';
 import GlassCard from '@/components/ui/GlassCard';
 import dynamic from 'next/dynamic';
@@ -15,35 +15,59 @@ export default function InvestorRelationsPage() {
   const [selectedPeriod, setSelectedPeriod] = useState('1Y');
 
   const performanceMetrics = {
-    totalInvestments: 2500000,
-    totalValuation: 12000000,
-    activeCompanies: 2,
+    totalInvestments: 0,
+    totalValuation: 0,
+    activeCompanies: 8,
     exitedCompanies: 0,
-    totalReturns: 4800000,
+    totalReturns: 0,
     averageGrowth: 92.5,
-    portfolioValue: 15600000
+    portfolioValue: 0
   };
 
   const periods = ['1M', '3M', '6M', '1Y', '3Y', 'ALL'];
 
   const portfolioCompanies = [
+    
     {
-      name: 'BotStream',
-      industry: 'FinTech',
-      investmentDate: '2024-01-15',
-      investmentAmount: 2000000,
-      currentValuation: 10000000,
+      name:  "Comprena Market",
+      industry: 'E-Commerce',
+      investmentDate: '2026-10-15',
+      investmentAmount: 0,
+      currentValuation: 0,
+      ownership: 100,
+      status: 'Active',
+      growth: 150,
+      description: "B2B/B2C E-commerce platform"
+    },
+    {
+      name: "Verticalo Streaming",
+      industry: "Vertical streaming platform",
+      investmentDate: '2026-10-15',
+      investmentAmount: 0,
+      currentValuation: 0,
       ownership: 25,
       status: 'Active',
       growth: 150,
-      description: 'AI-powered cryptocurrency trading platform'
+      description:"Vertical stream platform for shortb form drama series and more"
     },
+    {
+      name:"Zippy Toons",
+      industry: 'Youtube childrens channels',
+      investmentDate: '2025-08-15',
+      investmentAmount: 0,
+      currentValuation: 0,
+      ownership: 100,
+      status: 'Active',
+      growth: 150,
+      description: "children youtube channel that has automation for generating scripts, images, audio and video plus putting all them together"
+    },
+
     {
       name: 'Future Ventures',
       industry: 'AI/ML',
       investmentDate: '2024-06-01',
-      investmentAmount: 500000,
-      currentValuation: 2000000,
+      investmentAmount: 0,
+      currentValuation: 0,
       ownership: 15,
       status: 'Development',
       growth: 75,
@@ -67,7 +91,7 @@ export default function InvestorRelationsPage() {
       downloadUrl: '#'
     },
     {
-      title: 'BotStream Investment Case Study',
+      title: 'Comprena Market Investment Case Study',
       date: '2024-11-15',
       type: 'Case Study',
       size: '1.2 MB',
@@ -81,6 +105,29 @@ export default function InvestorRelationsPage() {
       downloadUrl: '#'
     }
   ];
+
+  const portfolioGrowth = [
+    { id: '1', value: 2000000, label: '2024 Q1', color: '#3b82f6' },
+    { id: '2', value: 4000000, label: '2024 Q2', color: '#3b82f6' },
+    { id: '3', value: 6000000, label: '2024 Q3', color: '#3b82f6' },
+    { id: '4', value: 8000000, label: '2024 Q4', color: '#3b82f6' },
+    { id: '5', value: 12000000, label: '2025 Q1', color: '#10b981' },
+    { id: '6', value: 15600000, label: '2025 Q2', color: '#10b981' },
+  ];
+
+  // Trailing quarters shown for each period button
+  const periodWindows: Record<string, number> = {
+    '1M': 1,
+    '3M': 2,
+    '6M': 3,
+    '1Y': 4,
+    '3Y': portfolioGrowth.length,
+    ALL: portfolioGrowth.length,
+  };
+
+  const chartData = portfolioGrowth.slice(
+    -Math.min(periodWindows[selectedPeriod] ?? portfolioGrowth.length, portfolioGrowth.length)
+  );
 
   const keyHighlights = [
     {
@@ -125,6 +172,16 @@ export default function InvestorRelationsPage() {
       return (num / 1000).toFixed(1) + 'K';
     }
     return num.toString();
+  };
+
+  const getCompanyRoute = (companyName: string) => {
+    const routeMap: { [key: string]: string } = {
+      'Comprena Market': '/companies/comprena-market',
+      'Verticalo Streaming': '/companies/verticalo-streaming',
+      'Zippy Toons': '/companies/zippy-toons',
+      'Future Ventures': '/companies/future-ventures',
+    };
+    return routeMap[companyName] || '#';
   };
 
   return (
@@ -252,7 +309,7 @@ export default function InvestorRelationsPage() {
                 <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-2">Portfolio Performance</h2>
                 <p className="text-gray-600 dark:text-gray-300">Track our portfolio value growth over time</p>
               </div>
-              <div className="flex items-center space-x-2 mt-4 sm:mt-0">
+              <div className="flex flex-wrap items-center gap-2 mt-4 sm:mt-0">
                 {periods.map((period) => (
                   <button
                     key={period}
@@ -272,14 +329,7 @@ export default function InvestorRelationsPage() {
             {/* 3D Data Visualization */}
             <div className="h-96 rounded-xl overflow-hidden">
               <DataVisualizationComponent 
-                data={[
-                  { id: '1', value: 2000000, label: '2024 Q1', color: '#3b82f6' },
-                  { id: '2', value: 4000000, label: '2024 Q2', color: '#3b82f6' },
-                  { id: '3', value: 6000000, label: '2024 Q3', color: '#3b82f6' },
-                  { id: '4', value: 8000000, label: '2024 Q4', color: '#3b82f6' },
-                  { id: '5', value: 12000000, label: '2025 Q1', color: '#10b981' },
-                  { id: '6', value: 15600000, label: '2025 Q2', color: '#10b981' },
-                ]}
+                data={chartData}
                 type="bar"
                 title="Portfolio Growth"
               />
@@ -301,6 +351,7 @@ export default function InvestorRelationsPage() {
                     <th className="text-left py-4 px-2 text-gray-600 dark:text-gray-400 font-medium">Ownership</th>
                     <th className="text-left py-4 px-2 text-gray-600 dark:text-gray-400 font-medium">Growth</th>
                     <th className="text-left py-4 px-2 text-gray-600 dark:text-gray-400 font-medium">Status</th>
+                    <th className="text-left py-4 px-2 text-gray-600 dark:text-gray-400 font-medium">View</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -338,6 +389,15 @@ export default function InvestorRelationsPage() {
                         }`}>
                           {company.status}
                         </span>
+                      </td>
+                      <td className="py-4 px-2">
+                        <Link
+                          href={getCompanyRoute(company.name)}
+                          className="inline-flex items-center text-blue-600 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-300 font-medium"
+                        >
+                          View Details
+                          <ChevronRight className="ml-1 w-4 h-4" />
+                        </Link>
                       </td>
                     </tr>
                   ))}
@@ -455,7 +515,7 @@ export default function InvestorRelationsPage() {
             </Link>
             <a
               href="mailto:investors@quantumwaveholdings.com"
-              className="inline-flex items-center px-8 py-4 border-2 border-white text-white font-medium rounded-xl hover:bg-white/10 transition-colors"
+              className="inline-flex items-center px-8 py-4 border-2 border-white text-white font-medium rounded-xl hover:bg-white/10 transition-colors break-all text-center"
             >
               investors@quantumwaveholdings.com
             </a>

@@ -17,7 +17,7 @@ interface TimelineProps {
 
 export default function Timeline({ items, className = '' }: TimelineProps) {
   return (
-    <div className={`relative ${className}`}>
+    <div className={`relative overflow-x-clip ${className}`}>
       {/* Timeline line */}
       <div className="absolute left-8 md:left-1/2 top-0 bottom-0 w-0.5 bg-gradient-to-b from-blue-600 to-indigo-600 transform md:-translate-x-1/2"></div>
 

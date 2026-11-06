@@ -5,6 +5,7 @@ import { useState, useEffect, useRef } from 'react';
 import { Menu, X, ChevronDown } from 'lucide-react';
 import { ThemeToggleButton } from '../ui/ThemeToggle';
 import { motion, AnimatePresence } from 'framer-motion';
+import { siteCompanies } from '@/lib/content/site';
 
 const navigation = [
   { name: 'Home', href: '/' },
@@ -14,7 +15,7 @@ const navigation = [
     href: '/portfolio',
     children: [
       { name: 'All Companies', href: '/portfolio' },
-      { name: 'BotStream', href: '/companies/bostream' },
+      ...siteCompanies.map((company) => ({ name: company.name, href: company.href })),
       { name: 'Investment Criteria', href: '/portfolio/criteria' },
     ]
   },
@@ -51,8 +52,8 @@ export default function Header() {
   return (
     <header 
       ref={headerRef}
-      className={`bg-white/95 dark:bg-gray-900/95 backdrop-blur-sm shadow-lg border-b border-blue-100 dark:border-gray-700 sticky top-0 z-50 transition-all duration-300 ${
-        isScrolled ? 'py-2' : 'py-4'
+      className={`glass-card sticky top-0 z-50 transition-all duration-300 ${
+        isScrolled ? 'py-2 shadow-premium-lg' : 'py-4 shadow-premium'
       }`}
     >
       
@@ -65,9 +66,9 @@ export default function Header() {
                 <span className="text-white font-bold text-xs sm:text-sm">QWH</span>
               </div>
               <div className="hidden sm:block">
-                <h1 className="text-base sm:text-xl font-bold bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent">
+                <span className="block text-base font-bold gradient-text-animated sm:text-xl">
                   Quantum Wave Holdings
-                </h1>
+                </span>
                 <p className="text-xs text-gray-500 dark:text-gray-400 hidden lg:block">Corporate Excellence</p>
               </div>
             </Link>
@@ -84,7 +85,7 @@ export default function Header() {
               >
                 <Link
                   href={item.href}
-                  className="text-gray-700 dark:text-gray-200 hover:text-blue-600 dark:hover:text-blue-400 px-2 py-2 text-sm font-medium transition-colors duration-200 flex items-center"
+                  className="nav-link text-gray-700 dark:text-gray-200 hover:text-blue-600 dark:hover:text-blue-400 px-2 py-2 text-sm font-medium flex items-center"
                 >
                   {item.name}
                   {item.children && (
@@ -92,17 +93,21 @@ export default function Header() {
                   )}
                 </Link>
                 {item.children && dropdownOpen === item.name && (
-                  <div className="absolute top-full left-0 mt-2 w-48 bg-white dark:bg-gray-800 rounded-lg shadow-lg border border-gray-100 dark:border-gray-700 py-2 z-50">
+                  <motion.div
+                    initial={{ opacity: 0, y: -10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    className="absolute top-full left-0 mt-2 w-48 glass-card rounded-lg py-2 z-50"
+                  >
                     {item.children.map((child) => (
                       <Link
                         key={child.name}
                         href={child.href}
-                        className="block px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-blue-50 dark:hover:bg-blue-900/50 hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
+                        className="block px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-blue-50 dark:hover:bg-blue-900/50 hover:text-blue-600 dark:hover:text-blue-400 transition-colors nav-link"
                       >
                         {child.name}
                       </Link>
                     ))}
-                  </div>
+                  </motion.div>
                 )}
               </div>
             ))}

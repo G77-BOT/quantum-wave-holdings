@@ -28,6 +28,10 @@ interface Company {
     exchanges?: number;
     users?: string;
     growth?: string;
+    quality?: string;
+    content?: string;
+    videos?: string;
+    subscribers?: string;
   };
   tags: string[];
   featured: boolean;
@@ -48,46 +52,94 @@ export default function PortfolioPage() {
         const mockCompanies: Company[] = [
           {
             id: '1',
-            name: 'BotStream',
-            slug: 'botstream',
-            description: 'Advanced cryptocurrency trading platform featuring real-time data streaming, professional analytics, and institutional-grade security for modern traders.',
-            shortDescription: 'AI-powered cryptocurrency trading platform with access to 14+ exchanges',
-            website: 'https://botstream.ca',
-            logo: '/images/companies/botstream-logo.png',
-            industry: 'FinTech',
+            name: 'Comprena Market',
+            slug: 'comprena-market',
+            description: 'B2B/B2C e-commerce platform providing seamless buying and selling experiences with advanced analytics and payment solutions.',
+            shortDescription: 'B2B/B2C E-commerce platform',
+            website: 'https://comprena-market.xyz',
+            logo: '/images/companies/comprena-market-logo.png',
+            industry: 'E-Commerce',
             founded: '2024',
             headquarters: 'Global',
             employees: '10-50',
-            status: 'development',
+            status: 'active',
             funding: 'N/A',
             valuation: 'N/A',
             metrics: {
               uptime: '99.9%',
               latency: '<10ms',
-              exchanges: 14,
               users: '5,000+',
               growth: '150%'
             },
-            tags: ['AI', 'Cryptocurrency', 'Trading', 'Real-time Analytics', 'Blockchain'],
+            tags: ['E-Commerce', 'B2B', 'B2C', 'Payments', 'Analytics'],
             featured: true
           },
           {
             id: '2',
+            name: 'Verticalo Streaming',
+            slug: 'verticalo-streaming',
+            description: 'Vertical streaming platform for short-form drama series and more, delivering engaging content experiences.',
+            shortDescription: 'Vertical streaming platform for short-form drama series',
+            website: 'https://vertical-streaming-platform.vercel.app',
+            logo: '/images/companies/verticalo-streaming-logo.png',
+            industry: 'Streaming',
+            founded: '2024',
+            headquarters: 'Global',
+            employees: '10-50',
+            status: 'active',
+            funding: 'N/A',
+            valuation: 'N/A',
+            metrics: {
+              quality: 'HD',
+              content: '100+',
+              users: '5,000+',
+              growth: '150%'
+            },
+            tags: ['Streaming', 'Content', 'Entertainment', 'Video'],
+            featured: true
+          },
+          {
+            id: '3',
+            name: 'Zippy Toons',
+            slug: 'zippy-toons',
+            description: 'Children\'s YouTube channel with automation for generating scripts, images, audio, and video content.',
+            shortDescription: 'Children\'s YouTube channel with content automation',
+            website: 'https://zippy-toons-fun.netlify.app/',
+            logo: '/images/companies/zippy-toons-logo.png',
+            industry: 'Children\'s Content',
+            founded: '2024',
+            headquarters: 'Global',
+            employees: '5-10',
+            status: 'active',
+            funding: 'N/A',
+            valuation: 'N/A',
+            metrics: {
+              videos: '100+',
+              subscribers: '5,000+',
+              growth: '150%'
+            },
+            tags: ['YouTube', 'Children', 'Automation', 'Content'],
+            featured: true
+          },
+          {
+            id: '4',
             name: 'Future Ventures',
             slug: 'future-ventures',
-            description: 'Coming soon - Next breakthrough innovation in development',
-            shortDescription: 'Stealth mode startup in AI and automation space',
-            website: '',
-            logo: '/images/companies/placeholder-logo.png',
+            description: 'Stealth mode AI automation startup developing intelligent business process solutions.',
+            shortDescription: 'AI/ML automation startup in stealth mode',
+            website: '#',
+            logo: '/images/companies/future-ventures-logo.png',
             industry: 'AI/ML',
             founded: '2024',
-            headquarters: 'TBD',
-            employees: 'Stealth',
+            headquarters: 'Global',
+            employees: '5-10',
             status: 'development',
-            funding: 'Pre-seed',
-            valuation: 'TBD',
-            metrics: {},
-            tags: ['AI', 'Machine Learning', 'Automation', 'Stealth'],
+            funding: 'N/A',
+            valuation: 'N/A',
+            metrics: {
+              growth: '75%'
+            },
+            tags: ['AI', 'ML', 'Automation', 'Stealth'],
             featured: false
           }
         ];
@@ -174,7 +226,7 @@ export default function PortfolioPage() {
               </div>
               
               {/* Filters */}
-              <div className="flex items-center space-x-4">
+              <div className="flex flex-wrap items-center gap-4">
                 <div className="flex items-center space-x-2">
                   <Filter className="w-4 h-4 text-gray-600 dark:text-gray-400" />
                   <span className="text-sm text-gray-600 dark:text-gray-400">Filter by:</span>

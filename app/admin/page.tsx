@@ -155,9 +155,9 @@ export default function AdminDashboard() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
       {/* Header */}
-      <header className="bg-white shadow-sm border-b border-gray-200">
+      <header className="bg-white dark:bg-gray-800 shadow-sm border-b border-gray-200 dark:border-gray-700">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16">
             <div className="flex items-center">
@@ -193,20 +193,20 @@ export default function AdminDashboard() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {/* Welcome Section */}
         <div className="mb-8">
-          <h2 className="text-2xl font-bold text-gray-900 mb-2">Welcome back!</h2>
-          <p className="text-gray-600">Here's what's happening with your portfolio today.</p>
+          <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-2">Welcome back!</h2>
+          <p className="text-gray-600 dark:text-gray-400">Here's what's happening with your portfolio today.</p>
         </div>
 
         {/* Stats Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
           {/* Companies Stats */}
-          <div className="bg-white dark:bg-gray-800 dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700 dark:border-gray-700 p-6">
+          <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700 p-6">
             <div className="flex items-center">
               <div className="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center mr-4">
                 <Building className="w-6 h-6 text-blue-600" />
               </div>
               <div className="flex-1">
-                <h3 className="text-lg font-semibold text-gray-900">Portfolio Companies</h3>
+                <h3 className="text-lg font-semibold text-gray-900 dark:text-white">Portfolio Companies</h3>
                 <div className="mt-2">
                   <div className="text-2xl font-bold text-gray-900 dark:text-white">{stats.companies.total}</div>
                   <div className="text-sm text-gray-600 dark:text-gray-400">
@@ -218,13 +218,13 @@ export default function AdminDashboard() {
           </div>
 
           {/* Jobs Stats */}
-          <div className="bg-white dark:bg-gray-800 dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700 dark:border-gray-700 p-6">
+          <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700 p-6">
             <div className="flex items-center">
               <div className="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center mr-4">
                 <Briefcase className="w-6 h-6 text-green-600" />
               </div>
               <div className="flex-1">
-                <h3 className="text-lg font-semibold text-gray-900">Job Openings</h3>
+                <h3 className="text-lg font-semibold text-gray-900 dark:text-white">Job Openings</h3>
                 <div className="mt-2">
                   <div className="text-2xl font-bold text-gray-900 dark:text-white">{stats.jobs.total}</div>
                   <div className="text-sm text-gray-600 dark:text-gray-400">
@@ -242,7 +242,7 @@ export default function AdminDashboard() {
                 <Newspaper className="w-6 h-6 text-purple-600" />
               </div>
               <div className="flex-1">
-                <h3 className="text-lg font-semibold text-gray-900">News Articles</h3>
+                <h3 className="text-lg font-semibold text-gray-900 dark:text-white">News Articles</h3>
                 <div className="mt-2">
                   <div className="text-2xl font-bold text-gray-900 dark:text-white">{stats.news.total}</div>
                   <div className="text-sm text-gray-600 dark:text-gray-400">
@@ -260,7 +260,7 @@ export default function AdminDashboard() {
                 <MessageSquare className="w-6 h-6 text-orange-600" />
               </div>
               <div className="flex-1">
-                <h3 className="text-lg font-semibold text-gray-900">Contact Messages</h3>
+                <h3 className="text-lg font-semibold text-gray-900 dark:text-white">Contact Messages</h3>
                 <div className="mt-2">
                   <div className="text-2xl font-bold text-gray-900 dark:text-white">{stats.contacts.total}</div>
                   <div className="text-sm text-gray-600 dark:text-gray-400">
@@ -278,7 +278,7 @@ export default function AdminDashboard() {
                 <Users className="w-6 h-6 text-indigo-600" />
               </div>
               <div className="flex-1">
-                <h3 className="text-lg font-semibold text-gray-900">Team Members</h3>
+                <h3 className="text-lg font-semibold text-gray-900 dark:text-white">Team Members</h3>
                 <div className="mt-2">
                   <div className="text-2xl font-bold text-gray-900 dark:text-white">{stats.team.total}</div>
                   <div className="text-sm text-gray-600 dark:text-gray-400">
@@ -296,7 +296,7 @@ export default function AdminDashboard() {
                 <Mail className="w-6 h-6 text-pink-600" />
               </div>
               <div className="flex-1">
-                <h3 className="text-lg font-semibold text-gray-900">Newsletter</h3>
+                <h3 className="text-lg font-semibold text-gray-900 dark:text-white">Newsletter</h3>
                 <div className="mt-2">
                   <div className="text-2xl font-bold text-gray-900 dark:text-white">{stats.subscribers.total}</div>
                   <div className="text-sm text-gray-600 dark:text-gray-400">
@@ -311,7 +311,7 @@ export default function AdminDashboard() {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
           {/* Quick Actions */}
           <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700 p-6">
-            <h3 className="text-lg font-semibold text-gray-900 mb-4">Quick Actions</h3>
+            <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">Quick Actions</h3>
             <div className="grid grid-cols-2 gap-4">
               {quickActions.map((action, index) => (
                 <Link
@@ -331,7 +331,7 @@ export default function AdminDashboard() {
 
           {/* Recent Activity */}
           <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700 p-6">
-            <h3 className="text-lg font-semibold text-gray-900 mb-4">Recent Activity</h3>
+            <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">Recent Activity</h3>
             <div className="space-y-4">
               {recentActivity.map((activity, index) => (
                 <div key={index} className="flex items-start space-x-3">

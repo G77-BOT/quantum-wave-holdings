@@ -60,24 +60,24 @@ export default function InvestmentCriteriaPage() {
 
   const industriesFocus = [
     {
-      name: "Financial Technology",
-      description: "Blockchain, cryptocurrency, digital payments, and trading platforms",
-      examples: ["BotStream - AI Trading Platform"]
+      name: "E-Commerce",
+      description: "B2B/B2C marketplaces, digital commerce, and consumer platforms",
+      examples: ["Comprena Market - E-Commerce Platform"]
+    },
+    {
+      name: "Streaming & Content",
+      description: "Video streaming, content creation, and digital entertainment",
+      examples: ["Verticalo Streaming - Short-form drama series", "Zippy Toons - Children's content"]
     },
     {
       name: "Artificial Intelligence",
       description: "Machine learning, automation, and AI-powered solutions",
-      examples: ["Data analytics", "Process automation", "Predictive modeling"]
+      examples: ["Future Ventures - AI/ML Automation"]
     },
     {
       name: "Software as a Service",
       description: "Cloud-based software solutions for businesses and consumers",
       examples: ["Enterprise software", "Productivity tools", "API platforms"]
-    },
-    {
-      name: "E-commerce & Digital",
-      description: "Online marketplaces, digital commerce, and consumer platforms",
-      examples: ["Marketplaces", "Direct-to-consumer", "Digital services"]
     },
     {
       name: "Technology Infrastructure",

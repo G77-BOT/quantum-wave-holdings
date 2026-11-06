@@ -197,7 +197,7 @@ export default function PrivacyPolicyPage() {
                 </p>
                 <div className="bg-gray-50 p-6 rounded-xl">
                   <p className="text-gray-900 font-semibold mb-2">Quantum Wave Holdings</p>
-                  <p className="text-gray-700">Email: privacy@quantumwaveholdings.com</p>
+                  <p className="text-gray-700 break-words">Email: privacy@quantumwaveholdings.com</p>
                   <p className="text-gray-700">Phone: +1 (555) 123-4567</p>
                   <p className="text-gray-700">Address: 123 Investment Street, Suite 456, New York, NY 10001</p>
                 </div>
